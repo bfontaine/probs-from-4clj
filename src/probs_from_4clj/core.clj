@@ -1,5 +1,6 @@
 (ns probs-from-4clj.core
-  :import 'clojure.set)
+  (:require clojure.set
+            clojure.string))
 
 ;; Note: some solutions that would be written
 ;;  foo bar
@@ -857,10 +858,10 @@
   nil)
 
 ;; problem 125
-(def gus-quinundrum-solution
-  (fn []
-    (let [s (str (quote (fn [] (let [s (str (quote %s))] (format s s)))))]
-      (format s s))))
+;; gus-quinundrum-solution =>
+;;   (fn []
+;;     (let [s (str (quote (fn [] (let [s (str (quote %s))] (format s s)))))]
+;;       (format s s))))
 
 ;; problem 126
 (def through-the-looking-class-solution
