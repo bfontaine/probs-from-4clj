@@ -1,5 +1,8 @@
 # Problems from 4clojure
 
+[![Build Status](https://travis-ci.org/bfontaine/probs-from-4clj.png)](https://travis-ci.org/bfontaine/probs-from-4clj)
+[![Coverage Status](https://coveralls.io/repos/bfontaine/probs-from-4clj/badge.png)](https://coveralls.io/r/bfontaine/probs-from-4clj)
+
 Here are my solutions to [4clojure][] problems. I’m trying to write the
 smallest possible functions for the code golfing challenge.
 
