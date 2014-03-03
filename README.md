@@ -1,14 +1,7 @@
-# probs-from-4clj
+# probs from 4clj
 
-A Clojure library designed to ... well, that part is up to you.
+Here are my solutions to [4clojure][] problems. I’m trying to write the
+smallest possible functions for the code golfing challenge.
 
-## Usage
+[4clojure]: http://www.4clojure.com/
 
-FIXME
-
-## License
-
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
