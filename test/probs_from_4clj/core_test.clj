@@ -14,8 +14,8 @@
   (is (= intro-to-strings-solution (.toUpperCase "hello world"))))
 
 
-(deftest can-intro-to-lists
-  (is (= (list intro-to-lists-solution) '(:a :b :c))))
+;; (deftest can-intro-to-lists
+;;   (is (= (list intro-to-lists-solution) '(:a :b :c))))
 
 
 (deftest can-lists-conj
@@ -23,8 +23,8 @@
   (is (= lists-conj-solution (conj '(3 4) 2 1))))
 
 
-(deftest can-intro-to-vectors
-  (is (= [intro-to-vectors-solution] (list :a :b :c) (vec '(:a :b :c)) (vector :a :b :c))))
+;; (deftest can-intro-to-vectors
+;;   (is (= [intro-to-vectors-solution] (list :a :b :c) (vec '(:a :b :c)) (vector :a :b :c))))
 
 
 (deftest can-vectors-conj
@@ -201,10 +201,10 @@
   (is (= local-bindings-solution (let [x 21] (let [y 3] (/ x y))))))
 
 
-(deftest can-let-it-be
-  (is (= 10 (let let-it-be-solution (+ x y))))
-  (is (= 4 (let let-it-be-solution (+ y z))))
-  (is (= 1 (let let-it-be-solution z))))
+;; (deftest can-let-it-be
+;;   (is (= 10 (let let-it-be-solution (+ x y))))
+;;   (is (= 4 (let let-it-be-solution (+ y z))))
+;;   (is (= 1 (let let-it-be-solution z))))
 
 
 (deftest can-regular-expressions
@@ -1408,3 +1408,292 @@
               [1 8 5 2 4]
               [8 1 2 4 5]])
    {4 1, 3 1, 2 7})))
+
+
+(deftest can-subset-and-superset
+  (is (clojure.set/superset? subset-and-superset-solution #{2}))
+  (is (clojure.set/subset? #{1} subset-and-superset-solution))
+  (is (clojure.set/superset? subset-and-superset-solution #{1 2}))
+  (is (clojure.set/subset? #{1 2} subset-and-superset-solution)))
+
+
+(deftest can-logical-falsity-and-truth
+  (is (= logical-falsity-and-truth-solution (if-not false 1 0)))
+  (is (= logical-falsity-and-truth-solution (if-not nil 1 0)))
+  (is (= logical-falsity-and-truth-solution (if true 1 0)))
+  (is (= logical-falsity-and-truth-solution (if [] 1 0)))
+  (is (= logical-falsity-and-truth-solution (if [0] 1 0)))
+  (is (= logical-falsity-and-truth-solution (if 0 1 0)))
+  (is (= logical-falsity-and-truth-solution (if 1 1 0))))
+
+
+(deftest can-map-defaults
+  (is (= (map-defaults-solution 0 [:a :b :c]) {:a 0 :b 0 :c 0}))
+  (is (= (map-defaults-solution "x" [1 2 3]) {1 "x" 2 "x" 3 "x"}))
+  (is (= (map-defaults-solution [:a :b] [:foo :bar]) {:foo [:a :b] :bar [:a :b]})))
+
+
+(deftest can-comparisons
+  (is (= :gt (comparisons-solution < 5 1)))
+  (is (= :eq (comparisons-solution (fn [x y] (< (count x) (count y))) "pear" "plum")))
+  (is (= :lt (comparisons-solution (fn [x y] (< (mod x 5) (mod y 5))) 21 3)))
+  (is (= :gt (comparisons-solution > 0 2))
+))
+
+
+(deftest can-indexing-sequences
+  (is (= (indexing-sequences-solution [:a :b :c]) [[:a 0] [:b 1] [:c 2]]))
+  (is (= (indexing-sequences-solution [0 1 3]) '((0 0) (1 1) (3 2))))
+  (is (= (indexing-sequences-solution [[:foo] {:bar :baz}]) [[[:foo] 0] [{:bar :baz} 1]])))
+
+
+(deftest can-intro-to-destructuring-2
+  (is (= 3
+  (let [[intro-to-destructuring-2-solution] [+ (range 3)]] (apply intro-to-destructuring-2-solution))
+  (let [[[intro-to-destructuring-2-solution] b] [[+ 1] 2]] (intro-to-destructuring-2-solution b))
+  (let [[intro-to-destructuring-2-solution] [inc 2]] (intro-to-destructuring-2-solution)))))
+
+
+(deftest can-pairwise-disjoint-sets
+  (is (= (pairwise-disjoint-sets-solution #{#{\U} #{\s} #{\e \R \E} #{\P \L} #{\.}})
+   true))
+  (is (= (pairwise-disjoint-sets-solution #{#{:a :b :c :d :e}
+         #{:a :b :c :d}
+         #{:a :b :c}
+         #{:a :b}
+         #{:a}})
+   false))
+  (is (= (pairwise-disjoint-sets-solution #{#{[1 2 3] [4 5]}
+         #{[1 2] [3 4 5]}
+         #{[1] [2] 3 4 5}
+         #{1 2 [3 4] [5]}})
+   true))
+  (is (= (pairwise-disjoint-sets-solution #{#{'a 'b}
+         #{'c 'd 'e}
+         #{'f 'g 'h 'i}
+         #{''a ''c ''f}})
+   true))
+  (is (= (pairwise-disjoint-sets-solution #{#{'(:x :y :z) '(:x :y) '(:z) '()}
+         #{#{:x :y :z} #{:x :y} #{:z} #{}}
+         #{'[:x :y :z] [:x :y] [:z] [] {}}})
+   false))
+  (is (= (pairwise-disjoint-sets-solution #{#{(= "true") false}
+         #{:yes :no}
+         #{(class 1) 0}
+         #{(symbol "true") 'false}
+         #{(keyword "yes") ::no}
+         #{(class '1) (int \0)}})
+   false))
+  (is (= (pairwise-disjoint-sets-solution #{#{distinct?}
+         #{#(-> %) #(-> %)}
+         #{#(-> %) #(-> %) #(-> %)}
+         #{#(-> %) #(-> %) #(-> %)}})
+   true))
+  (is (= (pairwise-disjoint-sets-solution #{#{(#(-> *)) + (quote mapcat) #_ nil}
+         #{'+ '* mapcat (comment mapcat)}
+         #{(do) set contains? nil?}
+         #{, , , #_, , empty?}})
+   false)))
+
+
+(deftest can-infinite-matrix
+  (is (= (take 5 (map #(take 6 %) (infinite-matrix-solution str)))
+   [["00" "01" "02" "03" "04" "05"]
+    ["10" "11" "12" "13" "14" "15"]
+    ["20" "21" "22" "23" "24" "25"]
+    ["30" "31" "32" "33" "34" "35"]
+    ["40" "41" "42" "43" "44" "45"]]))
+  (is (= (take 6 (map #(take 5 %) (infinite-matrix-solution str 3 2)))
+   [["32" "33" "34" "35" "36"]
+    ["42" "43" "44" "45" "46"]
+    ["52" "53" "54" "55" "56"]
+    ["62" "63" "64" "65" "66"]
+    ["72" "73" "74" "75" "76"]
+    ["82" "83" "84" "85" "86"]]))
+  (is (= (infinite-matrix-solution * 3 5 5 7)
+   [[15 18 21 24 27 30 33]
+    [20 24 28 32 36 40 44]
+    [25 30 35 40 45 50 55]
+    [30 36 42 48 54 60 66]
+    [35 42 49 56 63 70 77]]))
+  (is (= (infinite-matrix-solution #(/ % (inc %2)) 1 0 6 4)
+   [[1/1 1/2 1/3 1/4]
+    [2/1 2/2 2/3 1/2]
+    [3/1 3/2 3/3 3/4]
+    [4/1 4/2 4/3 4/4]
+    [5/1 5/2 5/3 5/4]
+    [6/1 6/2 6/3 6/4]]))
+  (is (= (class (infinite-matrix-solution (juxt bit-or bit-xor)))
+   (class (infinite-matrix-solution (juxt quot mod) 13 21))
+   (class (lazy-seq))))
+  (is (= (class (nth (infinite-matrix-solution (constantly 10946)) 34))
+   (class (nth (infinite-matrix-solution (constantly 0) 5 8) 55))
+   (class (lazy-seq))))
+  (is (= (let [m 377 n 610 w 987
+         check (fn [f s] (every? true? (map-indexed f s)))
+         row (take w (nth (infinite-matrix-solution vector) m))
+         column (take w (map first (infinite-matrix-solution vector m n)))
+         diagonal (map-indexed #(nth %2 %) (infinite-matrix-solution vector m n w w))]
+     (and (check #(= %2 [m %]) row)
+          (check #(= %2 [(+ m %) n]) column)
+          (check #(= %2 [(+ m %) (+ n %)]) diagonal)))
+   true)))
+
+
+(deftest can-decurry
+  (is (= 10 ((decurry-solution (fn [a]
+             (fn [b]
+               (fn [c]
+                 (fn [d]
+                   (+ a b c d))))))
+       1 2 3 4)))
+  (is (= 24 ((decurry-solution (fn [a]
+             (fn [b]
+               (fn [c]
+                 (fn [d]
+                   (* a b c d))))))
+       1 2 3 4)))
+  (is (= 25 ((decurry-solution (fn [a]
+             (fn [b]
+               (* a b))))
+       5 5))
+))
+
+
+(deftest can-intervals
+  (is (= (intervals-solution [1 2 3]) [[1 3]]))
+  (is (= (intervals-solution [10 9 8 1 2 3]) [[1 3] [8 10]]))
+  (is (= (intervals-solution [1 1 1 1 1 1 1]) [[1 1]]))
+  (is (= (intervals-solution []) []))
+  (is (= (intervals-solution [19 4 17 1 3 10 2 13 13 2 16 4 2 15 13 9 6 14 2 11])
+       [[1 4] [6 6] [9 11] [13 17] [19 19]])
+))
+
+
+(deftest can-balancing-brackets
+  (is (balancing-brackets-solution "This string has no brackets."))
+  (is (balancing-brackets-solution "class Test {
+      public static void main(String[] args) {
+        System.out.println(\"Hello world.\");
+      }
+    }"))
+  (is (not (balancing-brackets-solution "(start, end]")))
+  (is (not (balancing-brackets-solution "())")))
+  (is (not (balancing-brackets-solution "[ { ] } ")))
+  (is (balancing-brackets-solution "([]([(()){()}(()(()))(([[]]({}()))())]((((()()))))))"))
+  (is (not (balancing-brackets-solution "([]([(()){()}(()(()))(([[]]({}([)))())]((((()()))))))")))
+  (is (not (balancing-brackets-solution "["))))
+
+
+(deftest can-language-of-a-dfa
+  (is (= #{"a" "ab" "abc"}
+   (set (language-of-a-dfa-solution '{:states #{q0 q1 q2 q3}
+              :alphabet #{a b c}
+              :start q0
+              :accepts #{q1 q2 q3}
+              :transitions {q0 {a q1}
+                            q1 {b q2}
+                            q2 {c q3}}}))))
+  (is 
+(= #{"hi" "hey" "hello"}
+   (set (language-of-a-dfa-solution '{:states #{q0 q1 q2 q3 q4 q5 q6 q7}
+              :alphabet #{e h i l o y}
+              :start q0
+              :accepts #{q2 q4 q7}
+              :transitions {q0 {h q1}
+                            q1 {i q2, e q3}
+                            q3 {l q5, y q4}
+                            q5 {l q6}
+                            q6 {o q7}}}))))
+  (is (= (set (let [ss "vwxyz"] (for [i ss, j ss, k ss, l ss] (str i j k l))))
+   (set (language-of-a-dfa-solution '{:states #{q0 q1 q2 q3 q4}
+              :alphabet #{v w x y z}
+              :start q0
+              :accepts #{q4}
+              :transitions {q0 {v q1, w q1, x q1, y q1, z q1}
+                            q1 {v q2, w q2, x q2, y q2, z q2}
+                            q2 {v q3, w q3, x q3, y q3, z q3}
+                            q3 {v q4, w q4, x q4, y q4, z q4}}}))))
+  (is (let [res (take 2000 (language-of-a-dfa-solution '{:states #{q0 q1}
+                           :alphabet #{0 1}
+                           :start q0
+                           :accepts #{q0}
+                           :transitions {q0 {0 q0, 1 q1}
+                                         q1 {0 q1, 1 q0}}}))]
+  (and (every? (partial re-matches #"0*(?:10*10*)*") res)
+       (= res (distinct res)))))
+  (is (let [res (take 2000 (language-of-a-dfa-solution '{:states #{q0 q1}
+                           :alphabet #{n m}
+                           :start q0
+                           :accepts #{q1}
+                           :transitions {q0 {n q0, m q1}}}))]
+  (and (every? (partial re-matches #"n*m") res)
+       (= res (distinct res)))))
+  (is (let [res (take 2000 (language-of-a-dfa-solution '{:states #{q0 q1 q2 q3 q4 q5 q6 q7 q8 q9}
+                           :alphabet #{i l o m p t}
+                           :start q0
+                           :accepts #{q5 q8}
+                           :transitions {q0 {l q1}
+                                         q1 {i q2, o q6}
+                                         q2 {m q3}
+                                         q3 {i q4}
+                                         q4 {t q5}
+                                         q6 {o q7}
+                                         q7 {p q8}
+                                         q8 {l q9}
+                                         q9 {o q6}}}))]
+  (and (every? (partial re-matches #"limit|(?:loop)+") res)
+       (= res (distinct res))))
+))
+
+
+(deftest can-best-hand
+  (is (= :high-card (best-hand-solution ["HA" "D2" "H3" "C9" "DJ"])))
+  (is (= :pair (best-hand-solution ["HA" "HQ" "SJ" "DA" "HT"])))
+  (is (= :two-pair (best-hand-solution ["HA" "DA" "HQ" "SQ" "HT"])))
+  (is (= :three-of-a-kind (best-hand-solution ["HA" "DA" "CA" "HJ" "HT"])))
+  (is (= :straight (best-hand-solution ["HA" "DK" "HQ" "HJ" "HT"])))
+  (is (= :straight (best-hand-solution ["HA" "H2" "S3" "D4" "C5"])))
+  (is (= :flush (best-hand-solution ["HA" "HK" "H2" "H4" "HT"])))
+  (is (= :full-house (best-hand-solution ["HA" "DA" "CA" "HJ" "DJ"])))
+  (is (= :four-of-a-kind (best-hand-solution ["HA" "DA" "CA" "SA" "DJ"])))
+  (is (= :straight-flush (best-hand-solution ["HA" "HK" "HQ" "HJ" "HT"]))
+))
+
+
+(deftest can-for-science
+  (is (= true  (for-science-solution ["M   C"])))
+  (is (= false (for-science-solution ["M # C"])))
+  (is (= true  (for-science-solution ["#######"
+              "#     #"
+              "#  #  #"
+              "#M # C#"
+              "#######"])))
+  (is (= false (for-science-solution ["########"
+              "#M  #  #"
+              "#   #  #"
+              "# # #  #"
+              "#   #  #"
+              "#  #   #"
+              "#  # # #"
+              "#  #   #"
+              "#  #  C#"
+              "########"])))
+  (is (= false (for-science-solution ["M     "
+              "      "
+              "      "
+              "      "
+              "    ##"
+              "    #C"])))
+  (is (= true  (for-science-solution ["C######"
+              " #     "
+              " #   # "
+              " #   #M"
+              "     # "])))
+  (is (= true  (for-science-solution ["C# # # #"
+              "        "
+              "# # # # "
+              "        "
+              " # # # #"
+              "        "
+              "# # # #M"]))))
