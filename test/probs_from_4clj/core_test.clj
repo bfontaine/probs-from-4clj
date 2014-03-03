@@ -378,11 +378,11 @@
   (is (= (filter-perfect-squares-solution "4,5,6,7,8,9") "4,9"))
   (is (= (filter-perfect-squares-solution "15,16,25,36,37") "16,25,36")))
 
-;(deftest can-euler-s-totient-function
-;  (is (= (euler-s-totient-function-solution 1) 1))
-;  (is (= (euler-s-totient-function-solution 10) (count '(1 3 7 9)) 4))
-;  (is (= (euler-s-totient-function-solution 40) 16))
-;  (is (= (euler-s-totient-function-solution 99) 60)))
+(deftest can-euler-s-totient-function
+  (is (= (euler-s-totient-function-solution 1) 1))
+  (is (= (euler-s-totient-function-solution 10) (count '(1 3 7 9)) 4))
+  (is (= (euler-s-totient-function-solution 40) 16))
+  (is (= (euler-s-totient-function-solution 99) 60)))
 
 (deftest can-intro-to-trampoline
   (is (= intro-to-trampoline-solution

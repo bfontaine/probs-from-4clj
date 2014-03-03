@@ -404,12 +404,14 @@
             (clojure.string/split c #","))))
 
 ;; problem 75
-(defn euler-s-totient-function-solution [x] ;; TODO
-  ;; Two numbers are coprime if their greatest common divisor equals 1.
-  ;; Euler's totient function f(x) is defined as the number of positive
-  ;; integers less than x which are coprime to x.  The special case f(1) equals
-  ;; 1.  Write a function which calculates Euler's totient function.
-  nil)
+(defn euler-s-totient-function-solution [n]
+  (count
+    (filter
+      #(= (loop [a % b n c a]
+            (if (= (mod a c) (mod b c) 0)
+              c
+              (recur a b (dec c)))) 1)
+      (range 1 (inc n)))))
 
 ;; problem 76
 (def intro-to-trampoline-solution
