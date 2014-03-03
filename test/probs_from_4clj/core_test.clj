@@ -633,16 +633,16 @@
   (is (== (least-common-multiple-solution 3/4 1/6) 3/2))
   (is (== (least-common-multiple-solution 7 5/7 2 3/5) 210)))
 
-;(deftest can-levenshtein-distance
-;  (is (= (levenshtein-distance-solution "kitten" "sitting") 3))
-;  (is (= (levenshtein-distance-solution "closure" "clojure") (levenshtein-distance-solution "clojure" "closure") 1))
-;  (is (= (levenshtein-distance-solution "xyx" "xyyyx") 2))
-;  (is (= (levenshtein-distance-solution "" "123456") 6))
-;  (is (= (levenshtein-distance-solution "Clojure" "Clojure") (levenshtein-distance-solution "" "") (levenshtein-distance-solution [] []) 0))
-;  (is (= (levenshtein-distance-solution [1 2 3 4] [0 2 3 4 5]) 2))
-;  (is (= (levenshtein-distance-solution '(:a :b :c :d) '(:a :d)) 2))
-;  (is (= (levenshtein-distance-solution "ttttattttctg" "tcaaccctaccat") 10))
-;  (is (= (levenshtein-distance-solution "gaattctaatctc" "caaacaaaaaattt") 9)))
+(deftest can-levenshtein-distance
+  (is (= (levenshtein-distance-solution "kitten" "sitting") 3))
+  (is (= (levenshtein-distance-solution "closure" "clojure") (levenshtein-distance-solution "clojure" "closure") 1))
+  (is (= (levenshtein-distance-solution "xyx" "xyyyx") 2))
+  (is (= (levenshtein-distance-solution "" "123456") 6))
+  (is (= (levenshtein-distance-solution "Clojure" "Clojure") (levenshtein-distance-solution "" "") (levenshtein-distance-solution [] []) 0))
+  (is (= (levenshtein-distance-solution [1 2 3 4] [0 2 3 4 5]) 2))
+  (is (= (levenshtein-distance-solution '(:a :b :c :d) '(:a :d)) 2))
+  (is (= (levenshtein-distance-solution "ttttattttctg" "tcaaccctaccat") 10))
+  (is (= (levenshtein-distance-solution "gaattctaatctc" "caaacaaaaaattt") 9)))
 
 (deftest can-intocamelcase
   (is (= (intocamelcase-solution "something") "something"))

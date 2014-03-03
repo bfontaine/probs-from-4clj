@@ -617,17 +617,24 @@
     c))
 
 ;; problem 101
-(defn levenshtein-distance-solution [s1 s2] ;; TODO
-  ;; Given two sequences x and y, calculate the Levenshtein
-  ;; distance of x and y, i. e. the minimum number of edits needed to
-  ;; transform x into y.  The allowed edits are:
-  ;; - insert a single item
-  ;; - delete a single item
-  ;; - replace a single item with another item.
-  ;;
-  ;; WARNING: Some of the test cases may timeout if you write an
-  ;; inefficient solution!
-  nil)
+(def levenshtein-distance-solution
+  #((fn L [a b c]
+      (let [p (rest a)
+            q (rest b)
+            i (inc c)
+            f first
+            e empty?
+            n count]
+        (cond
+          (= a b)  c
+          (e a)    (+ c (n b))
+          (e b)    (+ c (n a))
+          (= (f a) (f b)) (L p q c)
+          :else (min
+                  (L p b i)
+                  (L a q i)
+                  (L p q i)))))
+    % %2 0))
 
 ;; problem 102
 (def intocamelcase-solution
