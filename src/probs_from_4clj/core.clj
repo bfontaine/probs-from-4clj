@@ -688,26 +688,30 @@
 
 ;; problem 106
 (def number-maze-solution
-  (fn [a b]
-    (let [m (+ 1 (* 2 (Math/abs (- b a)))) ; max number of steps
-          i (+ 1 m)]
+  #(let [a %
+         b %2
+         x inc
+         e even?
+         m (x (* 2 (Math/abs (- b a))))
+         i (x m)]
 
       ((fn M [a c v]
-         (let [d (+ 1 c)
-               w (conj v a)]
+         (let [d (x c)
+               w (conj v a)
+               A (* a 2)]
            (cond
              (v a) i
              (> c m) i
              (= a b) d
 
-             (and (odd? a) (even? b)) (recur (* a 2) d w)
+             (and (odd? a) (e b)) (recur A d w)
 
              :else (min
                       (M (+ a 2) d w)
-                      (M (* a 2) d w)
-                      (if (even? a) (M (/ a 2) d w) i)))))
+                      (M A       d w)
+                      (if (e a) (M (/ a 2) d w) i)))))
 
-       a 0 #{}))))
+       a 0 #{})))
 
 ;; problem 107
 (defn simple-closures-solution [n]
