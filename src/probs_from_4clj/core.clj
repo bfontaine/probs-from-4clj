@@ -686,17 +686,24 @@
          (partition 2 (map #(filter identity %)
                            (partition-by keyword? (interpose nil c)))))))
 
-;; problem 106
-(defn number-maze-solution [a b] ;; TODO
-  ;; Given a pair of numbers, the start and end point, find a path between the
-  ;; two using only three possible operations:
-  ;; - double
-  ;; - halve (odd numbers cannot be halved)
-  ;; - add 2
-  ;; Find the shortest path through the "maze". Because there are multiple
-  ;; shortest paths, you must return the length of the shortest path, not the
-  ;; path itself.
-  nil)
+;; problem 106 (FIXME works, but too long -> timeout on 4clj)
+(defn number-maze-solution [a b]
+  (let [mx (+ 1 (* 2 (Math/abs (- b a)))) ; max number of steps
+        inf Double/POSITIVE_INFINITY]
+
+    ((fn M [a cost visited]
+       (let [cost'    (inc cost)
+             visited' (conj visited a)]
+         (cond
+           (visited a) inf
+           (> cost mx) inf
+           (= a b) cost'
+           :else (min
+                    (M (+ a 2) cost' visited')
+                    (M (* a 2) cost' visited')
+                    (if (even? a) (M (/ a 2) cost' visited') inf)))))
+
+     a 0 #{})))
 
 ;; problem 107
 (defn simple-closures-solution [n]

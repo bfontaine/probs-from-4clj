@@ -674,13 +674,13 @@
   (is (= {:a [1], :b [2]} (identify-keys-and-values-solution [:a 1, :b 2])))
   (is (= {:a [1 2 3], :b [], :c [4]} (identify-keys-and-values-solution [:a 1 2 3 :b :c 4]))))
 
-;(deftest can-number-maze
-;  (is (= 1 (number-maze-solution 1 1)))  ; 1
-;  (is (= 3 (number-maze-solution 3 12))) ; 3 6 12
-;  (is (= 3 (number-maze-solution 12 3))) ; 12 6 3
-;  (is (= 3 (number-maze-solution 5 9)))  ; 5 7 9
-;  (is (= 9 (number-maze-solution 9 2)))  ; 9 18 20 10 12 6 8 4 2
-;  (is (= 5 (number-maze-solution 9 12)))) ; 9 11 22 24 12
+(deftest can-number-maze
+  (is (= 1 (number-maze-solution 1 1)))  ; 1
+  (is (= 3 (number-maze-solution 3 12))) ; 3 6 12
+  (is (= 3 (number-maze-solution 12 3))) ; 12 6 3
+  (is (= 3 (number-maze-solution 5 9)))  ; 5 7 9
+  (is (= 9 (number-maze-solution 9 2)))  ; 9 18 20 10 12 6 8 4 2
+  (is (= 5 (number-maze-solution 9 12)))) ; 9 11 22 24 12
 
 (deftest can-simple-closures
   (is (= 256 ((simple-closures-solution 2) 16),
