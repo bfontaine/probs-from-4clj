@@ -686,24 +686,28 @@
          (partition 2 (map #(filter identity %)
                            (partition-by keyword? (interpose nil c)))))))
 
-;; problem 106 (FIXME works, but too long -> timeout on 4clj)
-(defn number-maze-solution [a b]
-  (let [mx (+ 1 (* 2 (Math/abs (- b a)))) ; max number of steps
-        inf Double/POSITIVE_INFINITY]
+;; problem 106
+(def number-maze-solution
+  (fn [a b]
+    (let [m (+ 1 (* 2 (Math/abs (- b a)))) ; max number of steps
+          i (+ 1 m)]
 
-    ((fn M [a cost visited]
-       (let [cost'    (inc cost)
-             visited' (conj visited a)]
-         (cond
-           (visited a) inf
-           (> cost mx) inf
-           (= a b) cost'
-           :else (min
-                    (M (+ a 2) cost' visited')
-                    (M (* a 2) cost' visited')
-                    (if (even? a) (M (/ a 2) cost' visited') inf)))))
+      ((fn M [a c v]
+         (let [d (+ 1 c)
+               w (conj v a)]
+           (cond
+             (v a) i
+             (> c m) i
+             (= a b) d
 
-     a 0 #{})))
+             (and (odd? a) (even? b)) (recur (* a 2) d w)
+
+             :else (min
+                      (M (+ a 2) d w)
+                      (M (* a 2) d w)
+                      (if (even? a) (M (/ a 2) d w) i)))))
+
+       a 0 #{}))))
 
 ;; problem 107
 (defn simple-closures-solution [n]
