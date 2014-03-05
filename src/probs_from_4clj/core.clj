@@ -718,11 +718,15 @@
   #(int (. Math pow % n)))
 
 ;; problem 108
-(defn lazy-searching-solution [& seqs] ;; TODO
-  ;; Given any number of sequences, each sorted from smallest to largest,
-  ;; find the smallest single number which appears in all of the sequences. The
-  ;; sequences may be infinite, so be careful to search lazily.
-  nil)
+(def lazy-searching-solution
+  (fn [& s]
+    (loop [e (ffirst s)
+           s s]
+      (let [n #(< % e)
+            s (map #(drop-while n %) s)]
+        (if (apply = (map first s))
+          e
+          (recur (second (first s)) s))))))
 
 ;; problem 110
 (defn sequence-of-pronunciations-solution [c]
