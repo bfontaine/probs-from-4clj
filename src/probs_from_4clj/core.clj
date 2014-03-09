@@ -1046,12 +1046,14 @@
     0))
 
 ;; problem 144
-(defn oscilrate-solution [v & funs] ;; TODO
-  ;; Write an oscillating iterate: a function that takes an initial value and a
-  ;; variable number of functions. It should return a lazy sequence of the
-  ;; functions applied to the value in order, restarting from the first
-  ;; function after it hits the end.
-  nil)
+(def oscilrate-solution
+  (fn [v & f]
+    ((fn o [[f & x] v]
+       (lazy-seq
+         (cons
+           v
+           (o x (f v)))))
+     (cycle f) v)))
 
 ;; problem 145
 (def for-the-win-solution

@@ -1135,10 +1135,10 @@
   (is (= 32 (dot-product-solution [1 2 3] [4 5 6])))
   (is (= 256 (dot-product-solution [2 5 6] [100 10 1]))))
 
-;(deftest can-oscilrate
-;  (is (= (take 3 (oscilrate-solution 3.14 int double)) [3.14 3 3.0]))
-;  (is (= (take 5 (oscilrate-solution 3 #(- % 3) #(+ 5 %))) [3 0 5 2 7]))
-;  (is (= (take 12 (oscilrate-solution 0 inc dec inc dec inc)) [0 1 0 1 0 1 2 1 2 1 2 3])))
+(deftest can-oscilrate
+  (is (= (take 3 (oscilrate-solution 3.14 int double)) [3.14 3 3.0]))
+  (is (= (take 5 (oscilrate-solution 3 #(- % 3) #(+ 5 %))) [3 0 5 2 7]))
+  (is (= (take 12 (oscilrate-solution 0 inc dec inc dec inc)) [0 1 0 1 0 1 2 1 2 1 2 3])))
 
 (deftest can-for-the-win
   (is (= for-the-win-solution (for [x (range 40)
