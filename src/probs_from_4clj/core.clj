@@ -431,12 +431,14 @@
       e)))
 
 ;; problem 79
-(defn triangle-minimal-path-solution [triangle] ;; TODO
-  ;; Write a function which calculates the sum of the minimal path through a
-  ;; triangle.  The triangle is represented as a collection of vectors.  The
-  ;; path should start at the top of the triangle and move to an adjacent
-  ;; number on the next row until the bottom of the triangle is reached.
-  nil)
+(def triangle-minimal-path-solution
+  #((fn t [[a & r :as x] i s]
+     (if (empty? x)
+       s
+       (min
+         (t r i (+ (a i) s))
+         (t r (+ 1 i) (+ (a i) s)))))
+    % 0 0))
 
 ;; problem 80
 (def perfect-numbers-solution
