@@ -453,15 +453,22 @@
       (d (u % %2) (u (d % %2) (d %2 %)))))
 
 ;; problem 82
-(defn word-chains-solution [& args] ;; TODO
-  ;; A word chain consists of a set of words ordered so that each word differs
-  ;; by only one letter from the words directly before and after it.  The one
-  ;; letter difference can be either an insertion, a deletion, or a
-  ;; substitution.  Here is an example word chain:<br/><br/>cat -> cot -> coat
-  ;; -> oat -> hat -> hot -> hog -> dog<br/><br/>Write a function which takes a
-  ;; sequence of words, and returns true if they can be arranged into one
-  ;; continous word chain, and false if they cannot.
-  nil)
+(defn word-chains-solution [ws]
+  (letfn [(c [v w r]
+            (if (= r 1)
+              (= (seq v) (seq w))
+              (let [[a & b] v
+                    [e & f] w]
+                (or 
+                  (= v w)
+                  (c b f (if (= a e) 0 1))
+                  (c b w 1)
+                  (c v f 1)))))
+          (f [s]
+            (if (empty? s)
+              [[]]
+              (mapcat (fn [x] (map #(cons x %) (f (disj s x)))) s)))]
+    (boolean (some #(every? (fn [[a b]] (c a b 0)) (partition 2 1 %)) (f ws)))))
 
 ;; problem 83
 (def a-half-truth-solution

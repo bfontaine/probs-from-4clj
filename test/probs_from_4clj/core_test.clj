@@ -435,13 +435,13 @@
   (is (= (set-intersection-solution #{0 1 2} #{3 4 5}) #{}))
   (is (= (set-intersection-solution #{:a :b :c :d} #{:c :e :a :f :d}) #{:a :c :d})))
 
-;(deftest can-word-chains
-;  (is (= true (word-chains-solution #{"hat" "coat" "dog" "cat" "oat" "cot" "hot" "hog"})))
-;  (is (= false (word-chains-solution #{"cot" "hot" "bat" "fat"})))
-;  (is (= false (word-chains-solution #{"to" "top" "stop" "tops" "toss"})))
-;  (is (= true (word-chains-solution #{"spout" "do" "pot" "pout" "spot" "dot"})))
-;  (is (= true (word-chains-solution #{"share" "hares" "shares" "hare" "are"})))
-;  (is (= false (word-chains-solution #{"share" "hares" "hare" "are"}))))
+(deftest can-word-chains
+  (is (= true (word-chains-solution #{"hat" "coat" "dog" "cat" "oat" "cot" "hot" "hog"})))
+  (is (= false (word-chains-solution #{"cot" "hot" "bat" "fat"})))
+  (is (= false (word-chains-solution #{"to" "top" "stop" "tops" "toss"})))
+  (is (= true (word-chains-solution #{"spout" "do" "pot" "pout" "spot" "dot"})))
+  (is (= true (word-chains-solution #{"share" "hares" "shares" "hare" "are"})))
+  (is (= false (word-chains-solution #{"share" "hares" "hare" "are"}))))
 
 (deftest can-a-half-truth
   (is (= false (a-half-truth-solution false false)))
