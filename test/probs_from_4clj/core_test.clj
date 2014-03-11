@@ -1015,12 +1015,12 @@
   (is (= 8  (infix-calculator-solution 10 / 2 - 1 * 2)))
   (is (= 72 (infix-calculator-solution 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))))
 
-;(deftest can-digits-and-bases
-;  (is (= [1 2 3 4 5 0 1] (digits-and-bases-solution 1234501 10)))
-;  (is (= [0] (digits-and-bases-solution 0 11)))
-;  (is (= [1 0 0 1] (digits-and-bases-solution 9 2)))
-;  (is (= [1 0] (let [n (rand-int 100000)](digits-and-bases-solution n n))))
-;  (is (= [16 18 5 24 15 1] (digits-and-bases-solution Integer/MAX_VALUE 42))))
+(deftest can-digits-and-bases
+  (is (= [1 2 3 4 5 0 1] (digits-and-bases-solution 1234501 10)))
+  (is (= [0] (digits-and-bases-solution 0 11)))
+  (is (= [1 0 0 1] (digits-and-bases-solution 9 2)))
+  (is (= [1 0] (let [n (rand-int 100000)](digits-and-bases-solution n n))))
+  (is (= [16 18 5 24 15 1] (digits-and-bases-solution Integer/MAX_VALUE 42))))
 
 ;(deftest can-squares-squared
 ;  (is (= (squares-squared-solution 2 2) ["2"]))
