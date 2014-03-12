@@ -250,12 +250,19 @@
 ;; intro-to-destructuring-solution => [c e]
 
 ;; problem 53
-(defn longest-increasing-sub-seq-solution [xs] ;; TODO
-  ;; Given a vector of integers, find the longest consecutive sub-sequence of
-  ;; increasing numbers. If two sub-sequences have the same length, use the one
-  ;; that occurs first. An increasing sub-sequence must have a length of 2 or
-  ;; greater to qualify.
-  nil)
+(def longest-increasing-sub-seq-solution
+  #(let [t (fn [[a b]] (= (+ 1 a) b))
+         c count]
+     (distinct
+       (apply concat
+         (reduce
+           (fn [a b]
+             (if (and
+                   (< (c a) (c b))
+                   (every? t b))
+                 b a))
+           []
+           (partition-by t (partition 2 1 %)))))))
 
 ;; problem 54
 (def partition-a-sequence-solution

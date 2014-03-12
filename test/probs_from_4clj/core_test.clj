@@ -236,11 +236,11 @@
 (deftest can-advanced-destructuring
   (is (= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] advanced-destructuring-solution] [a b c d]))))
 
-;(deftest can-longest-increasing-sub-seq
-;  (is (= (longest-increasing-sub-seq-solution [1 0 1 2 3 0 4 5]) [0 1 2 3]))
-;  (is (= (longest-increasing-sub-seq-solution [5 6 1 3 2 7]) [5 6]))
-;  (is (= (longest-increasing-sub-seq-solution [2 3 3 4 5]) [3 4 5]))
-;  (is (= (longest-increasing-sub-seq-solution [7 6 5 4]) [])))
+(deftest can-longest-increasing-sub-seq
+  (is (= (longest-increasing-sub-seq-solution [1 0 1 2 3 0 4 5]) [0 1 2 3]))
+  (is (= (longest-increasing-sub-seq-solution [5 6 1 3 2 7]) [5 6]))
+  (is (= (longest-increasing-sub-seq-solution [2 3 3 4 5]) [3 4 5]))
+  (is (= (longest-increasing-sub-seq-solution [7 6 5 4]) [])))
 
 (deftest can-partition-a-sequence
   (is (= (partition-a-sequence-solution 3 (range 9)) '((0 1 2) (3 4 5) (6 7 8))))
