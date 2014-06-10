@@ -948,9 +948,9 @@
 
 ;; problem 128
 (def recognize-playing-cards-solution
-  #(let [s {\D :diamond \H :heart \C :club \S :spade}
-         r {\2 0 \3 1 \4 2 \5 3 \6 4 \7 5 \8 6 \9 7 \T 8 \J 9 \Q 10 \K 11 \A 12}]
-     {:suit (s (first %)) :rank (r (last %))}))
+  (fn [[f l]]
+    {:suit ({\D :diamond \H :heart \C :club \S :spade} f)
+     :rank (.indexOf "23456789TJQKA" (str l))}))
 
 ;; problem 130
 (defn tree-reparenting-solution [& args] ;; TODO
