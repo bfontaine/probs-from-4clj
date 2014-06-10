@@ -34,7 +34,6 @@ All problems except the ones listed below are implemented.
 * [138](http://www.4clojure.com/problem/138)
 * [140](http://www.4clojure.com/problem/140)
 * [141](http://www.4clojure.com/problem/141)
-* [148](http://www.4clojure.com/problem/148)
 * [150](http://www.4clojure.com/problem/150)
 * [152](http://www.4clojure.com/problem/152)
 * [168](http://www.4clojure.com/problem/168)
