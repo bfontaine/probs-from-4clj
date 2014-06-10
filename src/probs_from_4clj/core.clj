@@ -1100,16 +1100,13 @@
       (cons x (pascal-s-trapezoid-solution y)))))
 
 ;; problem 148
-(defn the-big-divide-solution [n a b] ;; TODO
-  ;; <p>Write a function which calculates the sum of all natural numbers under
-  ;; <i>n</i> (first argument) which are evenly divisible by at least one of
-  ;; <i>a</i> and <i>b</i> (second and third argument). Numbers <i>a</i> and
-  ;; <i>b</i> are guaranteed to be <a
-  ;; href="http://en.wikipedia.org/wiki/Coprime">coprimes</a>.</p>
-  ;; 
-  ;; <p>Note: Some test cases have a very large <i>n</i>, so the most obvious
-  ;; solution will exceed the time limit.</p>
-  nil)
+(def the-big-divide-solution
+  (fn [n a b]
+    (let [f #(let [k (bigint (/ (dec n) %))]
+               (* % (/ (* k (inc k)) 2)))]
+      (-
+        (+ (f a) (f b))
+        (f (* a b))))))
 
 ;; problem 150
 (defn palindromic-numbers-solution [n] ;; TODO

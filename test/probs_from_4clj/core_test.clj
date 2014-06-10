@@ -1170,17 +1170,17 @@
   (is (= (take 2 (pascal-s-trapezoid-solution [3 1 2])) [[3 1 2] [3 4 3 2]]))
   (is (= (take 100 (pascal-s-trapezoid-solution [2 4 2])) (rest (take 101 (pascal-s-trapezoid-solution [2 2]))))))
 
-;(deftest can-the-big-divide
-;  (is (= 0 (the-big-divide-solution 3 17 11)))
-;  (is (= 23 (the-big-divide-solution 10 3 5)))
-;  (is (= 233168 (the-big-divide-solution 1000 3 5)))
-;  (is (= "2333333316666668" (str (the-big-divide-solution 100000000 3 5))))
-;  (is (= "110389610389889610389610"
-;  (str (the-big-divide-solution (* 10000 10000 10000) 7 11))))
-;  (is (= "1277732511922987429116"
-;  (str (the-big-divide-solution (* 10000 10000 10000) 757 809))))
-;  (is (= "4530161696788274281"
-;  (str (the-big-divide-solution (* 10000 10000 1000) 1597 3571)))))
+(deftest can-the-big-divide
+  (is (= 0 (the-big-divide-solution 3 17 11)))
+  (is (= 23 (the-big-divide-solution 10 3 5)))
+  (is (= 233168 (the-big-divide-solution 1000 3 5)))
+  (is (= "2333333316666668" (str (the-big-divide-solution 100000000 3 5))))
+  (is (= "110389610389889610389610"
+  (str (the-big-divide-solution (* 10000 10000 10000) 7 11))))
+  (is (= "1277732511922987429116"
+  (str (the-big-divide-solution (* 10000 10000 10000) 757 809))))
+  (is (= "4530161696788274281"
+  (str (the-big-divide-solution (* 10000 10000 1000) 1597 3571)))))
 
 ;(deftest can-palindromic-numbers
 ;  (is (= (take 26 (palindromic-numbers-solution 0))
