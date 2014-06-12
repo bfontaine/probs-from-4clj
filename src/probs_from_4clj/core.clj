@@ -7,6 +7,8 @@
 ;; on 4clojure are written using 'partial here:
 ;;  (partial foo bar)
 ;;
+;; Also, for easier copy-pasting, some functions are defined with 'def and 'fn
+;; instead of 'defn.
 
 ;; problem 1
 (def nothing-but-the-truth-solution
