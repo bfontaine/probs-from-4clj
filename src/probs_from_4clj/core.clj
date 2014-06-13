@@ -1042,26 +1042,27 @@
   nil)
 
 ;; problem 141
-(defn tricky-card-games-solution [trump-suit] ;; TODO
-  ;; <p> In <a
-  ;; href="http://en.wikipedia.org/wiki/Trick-taking_game">trick-taking card
-  ;; games</a> such as bridge, spades, or hearts, cards are played in groups
-  ;; known as "tricks" - each player plays a single card, in order; the first
-  ;; player is said to "lead" to the trick. After all players have played, one
-  ;; card is said to have "won" the trick. How the winner is determined will
-  ;; vary by game, but generally the winner is the highest card played <i>in
-  ;; the suit that was led</i>. Sometimes (again varying by game), a particular
-  ;; suit will be designated "trump", meaning that its cards are more powerful
-  ;; than any others: if there is a trump suit, and any trumps are played, then
-  ;; the highest trump wins regardless of what was led.  </p> <p> Your goal is
-  ;; to devise a function that can determine which of a number of cards has won
-  ;; a trick. You should accept a trump suit, and return a function
-  ;; <code>winner</code>. Winner will be called on a sequence of cards, and
-  ;; should return the one which wins the trick. Cards will be represented in
-  ;; the format returned by <a href="/problem/128/">Problem 128, Recognize
-  ;; Playing Cards</a>: a hash-map of <code>:suit</code> and a numeric
-  ;; <code>:rank</code>. Cards with a larger rank are stronger.  </p>
-  nil)
+(def tricky-card-games-solution
+  (fn [t]
+    (partial reduce
+             ;; %: current best card
+             ;; %2: current (other) card
+             #(let [S :suit
+                    R :rank
+                    sm (S %)
+                    sc (S %2)
+                    rm (R %)
+                    rc (R %2)]
+                (cond
+                  (= t sm sc) ; trump, already one card
+                    {S t
+                     R (max rm rc)}
+                  (= t sc) ; trump, first card
+                    %2
+                  (= sm sc) ; lead
+                    {S sm
+                     R (max rm rc)}
+                  :else %)))))
 
 ;; problem 143
 (defn dot-product-solution [s t]

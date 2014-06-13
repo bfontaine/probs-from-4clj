@@ -1117,17 +1117,17 @@
 ;   #{#{'B 'D}
 ;     #{'b 'd}})))
 
-;(deftest can-tricky-card-games
-;  (is (let [notrump (tricky-card-games-solution nil)]
-;  (and (= {:suit :club :rank 9}  (notrump [{:suit :club :rank 4}
-;                                           {:suit :club :rank 9}]))
-;       (= {:suit :spade :rank 2} (notrump [{:suit :spade :rank 2}
-;                                           {:suit :club :rank 10}])))))
-;  (is (= {:suit :club :rank 10} ((tricky-card-games-solution :club) [{:suit :spade :rank 2}
-;                                       {:suit :club :rank 10}])))
-;  (is (= {:suit :heart :rank 8}
-;   ((tricky-card-games-solution :heart) [{:suit :heart :rank 6} {:suit :heart :rank 8}
-;                 {:suit :diamond :rank 10} {:suit :heart :rank 4}]))))
+(deftest can-tricky-card-games
+  (is (let [notrump (tricky-card-games-solution nil)]
+  (and (= {:suit :club :rank 9}  (notrump [{:suit :club :rank 4}
+                                           {:suit :club :rank 9}]))
+       (= {:suit :spade :rank 2} (notrump [{:suit :spade :rank 2}
+                                           {:suit :club :rank 10}])))))
+  (is (= {:suit :club :rank 10} ((tricky-card-games-solution :club) [{:suit :spade :rank 2}
+                                       {:suit :club :rank 10}])))
+  (is (= {:suit :heart :rank 8}
+   ((tricky-card-games-solution :heart) [{:suit :heart :rank 6} {:suit :heart :rank 8}
+                 {:suit :diamond :rank 10} {:suit :heart :rank 4}]))))
 
 (deftest can-dot-product
   (is (= 0 (dot-product-solution [0 1 0] [1 0 0])))
