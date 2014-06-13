@@ -1465,17 +1465,17 @@
 ;  (and (every? (partial re-matches #"limit|(?:loop)+") res)
 ;       (= res (distinct res))))))
 
-;(deftest can-best-hand
-;  (is (= :high-card (best-hand-solution ["HA" "D2" "H3" "C9" "DJ"])))
-;  (is (= :pair (best-hand-solution ["HA" "HQ" "SJ" "DA" "HT"])))
-;  (is (= :two-pair (best-hand-solution ["HA" "DA" "HQ" "SQ" "HT"])))
-;  (is (= :three-of-a-kind (best-hand-solution ["HA" "DA" "CA" "HJ" "HT"])))
-;  (is (= :straight (best-hand-solution ["HA" "DK" "HQ" "HJ" "HT"])))
-;  (is (= :straight (best-hand-solution ["HA" "H2" "S3" "D4" "C5"])))
-;  (is (= :flush (best-hand-solution ["HA" "HK" "H2" "H4" "HT"])))
-;  (is (= :full-house (best-hand-solution ["HA" "DA" "CA" "HJ" "DJ"])))
-;  (is (= :four-of-a-kind (best-hand-solution ["HA" "DA" "CA" "SA" "DJ"])))
-;  (is (= :straight-flush (best-hand-solution ["HA" "HK" "HQ" "HJ" "HT"]))))
+(deftest can-best-hand
+  (is (= :high-card (best-hand-solution ["HA" "D2" "H3" "C9" "DJ"])))
+  (is (= :pair (best-hand-solution ["HA" "HQ" "SJ" "DA" "HT"])))
+  (is (= :two-pair (best-hand-solution ["HA" "DA" "HQ" "SQ" "HT"])))
+  (is (= :three-of-a-kind (best-hand-solution ["HA" "DA" "CA" "HJ" "HT"])))
+  (is (= :straight (best-hand-solution ["HA" "DK" "HQ" "HJ" "HT"])))
+  (is (= :straight (best-hand-solution ["HA" "H2" "S3" "D4" "C5"])))
+  (is (= :flush (best-hand-solution ["HA" "HK" "H2" "H4" "HT"])))
+  (is (= :full-house (best-hand-solution ["HA" "DA" "CA" "HJ" "DJ"])))
+  (is (= :four-of-a-kind (best-hand-solution ["HA" "DA" "CA" "SA" "DJ"])))
+  (is (= :straight-flush (best-hand-solution ["HA" "HK" "HQ" "HJ" "HT"]))))
 
 (deftest can-for-science
   (is (= true  (for-science-solution ["M   C"])))

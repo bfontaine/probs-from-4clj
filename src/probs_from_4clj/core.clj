@@ -1265,20 +1265,40 @@
         :else (recur (w r) (x r) p)))))
 
 ;; problem 178
-(defn best-hand-solution [hand] ;; TODO
-  ;; Following on from Recognize Playing Cards, determine the best poker hand
-  ;; that can be made with five cards. The hand rankings are listed below for
-  ;; your convenience.
-  ;;  
-  ;;  Straight flush: All cards in the same suit, and in sequence
-  ;;  Four of a kind: Four of the cards have the same rank
-  ;;  Full House: Three cards of one rank, the other two of another rank
-  ;;  Flush: All cards in the same suit
-  ;;  Straight: All cards in sequence (aces can be high or low, but not both at
-  ;;    once)
-  ;;  Three of a kind: Three of the cards have the same rank
-  ;;  Two pair: Two pairs of cards have the same rank
-  ;;  Pair: Two cards have the same rank
-  ;;  High card: None of the above conditions are met
-  ;; 
-  nil)
+(def best-hand-solution
+  (fn [c]
+    (let [all-eq? (fn [[h & t]]
+                    (every? #(= % h) t))
+          c (sort-by
+              last
+              (map (fn [[f l]] [f (.indexOf "_A23456789TJQK" (str l))]) c))
+          n (map last c)  ; numbers (ranks)
+          s (map first c) ; suits
+          [p1 p2 p3 p4 p5] n
+          sequ? (or
+                  (= n (range p1 (+ p1 5)))
+                  (= [1 10 11 12 13] n))
+          same-suit? (all-eq? s)]
+      (cond
+        (and sequ? same-suit?) :straight-flush
+        (or
+          (all-eq? (take 4 n))
+          (all-eq? (drop 1 n))) :four-of-a-kind
+        (or
+          (and (all-eq? (take 3 n)) (all-eq? (drop 3 n)))
+          (and (all-eq? (take 2 n)) (all-eq? (drop 2 n)))) :full-house
+        same-suit? :flush
+        sequ? :straight
+        (or
+          (all-eq? (take 3 n))
+          (all-eq? (take 3 (drop 1 n)))
+          (all-eq? (drop 2 n))) :three-of-a-kind
+        (= p1 p2)
+          (if (or (= p3 p4) (= p4 p5)) :two-pair :pair)
+
+        (= p2 p3)
+          (if (= p4 p5) :two-pair :pair)
+        (or
+          (= p3 p4)
+          (= p4 p5)) :pair
+        :else :high-card))))
