@@ -1049,19 +1049,18 @@
              ;; %2: current (other) card
              #(let [S :suit
                     R :rank
-                    sm (S %)
-                    sc (S %2)
-                    rm (R %)
-                    rc (R %2)]
+                    x (S %)
+                    y (S %2)
+                    m  (max (R %) (R %2))]
                 (cond
-                  (= t sm sc) ; trump, already one card
+                  (= t x y) ; trump, already one card
                     {S t
-                     R (max rm rc)}
-                  (= t sc) ; trump, first card
+                     R m}
+                  (= t y) ; trump, first card
                     %2
-                  (= sm sc) ; lead
-                    {S sm
-                     R (max rm rc)}
+                  (= x y) ; lead
+                    {S x
+                     R m}
                   :else %)))))
 
 ;; problem 143
