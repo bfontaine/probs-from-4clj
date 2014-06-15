@@ -508,17 +508,17 @@
   (is (= 300 (count (cartesian-product-solution (into #{} (range 10))
                   (into #{} (range 30)))))))
 
-;(deftest can-graph-connectivity
-;  (is (= true (graph-connectivity-solution #{[:a :a]})))
-;  (is (= true (graph-connectivity-solution #{[:a :b]})))
-;  (is (= false (graph-connectivity-solution #{[1 2] [2 3] [3 1]
-;               [4 5] [5 6] [6 4]})))
-;  (is (= true (graph-connectivity-solution #{[1 2] [2 3] [3 1]
-;              [4 5] [5 6] [6 4] [3 4]})))
-;  (is (= false (graph-connectivity-solution #{[:a :b] [:b :c] [:c :d]
-;               [:x :y] [:d :a] [:b :e]})))
-;  (is (= true (graph-connectivity-solution #{[:a :b] [:b :c] [:c :d]
-;              [:x :y] [:d :a] [:b :e] [:x :a]}))))
+(deftest can-graph-connectivity
+  (is (= true (graph-connectivity-solution #{[:a :a]})))
+  (is (= true (graph-connectivity-solution #{[:a :b]})))
+  (is (= false (graph-connectivity-solution #{[1 2] [2 3] [3 1]
+               [4 5] [5 6] [6 4]})))
+  (is (= true (graph-connectivity-solution #{[1 2] [2 3] [3 1]
+              [4 5] [5 6] [6 4] [3 4]})))
+  (is (= false (graph-connectivity-solution #{[:a :b] [:b :c] [:c :d]
+               [:x :y] [:d :a] [:b :e]})))
+  (is (= true (graph-connectivity-solution #{[:a :b] [:b :c] [:c :d]
+              [:x :y] [:d :a] [:b :e] [:x :a]}))))
 
 (deftest can-read-roman-numerals
   (is (= 14 (read-roman-numerals-solution "XIV")))
