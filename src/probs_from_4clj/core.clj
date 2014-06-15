@@ -486,13 +486,24 @@
   #(boolean (and (some true? %&) (not (every? true? %&)))))
 
 ;; problem 84
-(defn transitive-closure-solution [rel] ;; TODO
-  ;; Write a function which generates the <a
-  ;; href="http://en.wikipedia.org/wiki/Transitive_closure">transitive
-  ;; closure</a> of a <a
-  ;; href="http://en.wikipedia.org/wiki/Binary_relation">binary relation</a>.
-  ;; The relation will be represented as a set of 2 item vectors.
-  nil)
+(def transitive-closure-solution
+  (fn [r]
+    (loop [r r
+           c (count r)]
+      (let [r
+            (reduce
+              (fn [r [a b]]
+                (reduce (fn [r [f l]]
+                          (let [r (if (= b f) (conj r [a l]) r)]
+                            (if (= l a) (conj r [f b]) r)))
+                    r
+                    r))
+              r
+              r)
+              d (count r)]
+        (if (= c d)
+          r
+          (recur r d))))))
 
 ;; problem 85
 (defn power-set-solution [s] ;; TODO
