@@ -25,7 +25,6 @@ All problems except the ones listed below are implemented.
 * [127](http://www.4clojure.com/problem/127)
 * [130](http://www.4clojure.com/problem/130)
 * [131](http://www.4clojure.com/problem/131)
-* [137](http://www.4clojure.com/problem/137)
 * [138](http://www.4clojure.com/problem/138)
 * [140](http://www.4clojure.com/problem/140)
 * [150](http://www.4clojure.com/problem/150)
