@@ -1320,3 +1320,16 @@
           (= p3 p4)
           (= p4 p5)) :pair
         :else :high-card))))
+
+
+;; problem 195 (Medium)
+(defn parentheses-again-solution
+  [n]
+  ;; WIP
+
+  (if (= n 0)
+    #{""}
+    (set (mapcat(fn [c]
+             (set [(str "()" c) (str \( c \)) (str c "()")]))
+
+    (parentheses-again-solution (dec n))))))

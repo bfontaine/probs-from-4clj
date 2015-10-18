@@ -1510,3 +1510,12 @@
               " # # # #"
               "        "
               "# # # #M"]))))
+
+
+;; problem 195
+(deftest can-parentheses-again
+  (is (= [#{""} #{"()"} #{"()()" "(())"}] (map (fn [n] (parentheses-again-solution n)) [0 1 2])))
+  (is (= #{"((()))" "()()()" "()(())" "(())()" "(()())"} (parentheses-again-solution 3)))
+  (is (= 16796 (count (parentheses-again-solution 10))))
+  (is (= (nth (sort (filter #(.contains ^String % "(()()()())") (parentheses-again-solution 9))) 6) "(((()()()())(())))"))
+  (is (= (nth (sort (parentheses-again-solution 12)) 5000) "(((((()()()()()))))(()))")))
