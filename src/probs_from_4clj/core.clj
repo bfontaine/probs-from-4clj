@@ -507,7 +507,7 @@
           (recur r d))))))
 
 ;; problem 85
-(def power-set-solution
+(def power-set-solution ;; FIXME the tests timeout on 4clojure.com
   ;; Write a function which generates the <a
   ;; href="http://en.wikipedia.org/wiki/Power_set">power set</a> of a given
   ;; set.  The power set of a set x is the set of all subsets of x, including
@@ -890,7 +890,7 @@
       (fn [e]
         (< e
            (reduce
-             #(+ %1
+             #(+ %
                  (Math/pow (- (int %2) 48) 2)) 0 (seq (str e))))) c)))
 
 ;; problem 121
