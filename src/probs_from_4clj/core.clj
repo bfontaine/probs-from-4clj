@@ -521,10 +521,10 @@
      (= n 1) true
      (s n) false
      :else (recur (conj s n)
-                  (int (reduce + (map #(->> %
+                  (int (reduce + (map #(-> %
                                           str
-                                          (. Integer parseInt)
-                                          ((fn [x] (. Math pow x 2))))
+                                          (Integer/parseInt)
+                                          ((fn [x] (* x x))))
                                       (str n))))))))
 
 ;; problem 88
