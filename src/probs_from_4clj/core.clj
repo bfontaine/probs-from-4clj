@@ -530,7 +530,7 @@
 ;; problem 88
 (def symmetric-difference-solution
   (let [d clojure.set/difference]
-    #(clojure.set/union (d %1 %2) (d %2 %1))))
+    #(clojure.set/union (d % %2) (d %2 %))))
 
 ;; problem 89
 (defn graph-tour-solution [edges] ;; TODO
