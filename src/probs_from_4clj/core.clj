@@ -511,7 +511,7 @@
   ;; href="http://en.wikipedia.org/wiki/Power_set">power set</a> of a given
   ;; set.  The power set of a set x is the set of all subsets of x, including
   ;; the empty set and x itself.
-  (fn p [s] (apply clojure.set/union #{s} (map #(p (disj s %)) s))))
+  (fn p [s] (set (apply concat #{s} (map #(p (disj s %)) s)))))
 
 ;; problem 86
 (defn happy-numbers-solution [n]
