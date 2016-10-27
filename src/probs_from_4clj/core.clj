@@ -751,7 +751,7 @@
 
 ;; problem 107
 (defn simple-closures-solution [n]
-  #(int (. Math pow % n)))
+  #(int (Math/pow % n)))
 
 ;; problem 108
 (def lazy-searching-solution
