@@ -1112,7 +1112,7 @@
 ;; problem 147
 (defn pascal-s-trapezoid-solution [x]
   (lazy-seq
-    (let [y 
+    (let [y
           (conj
             (vec
               (cons (first x)
@@ -1250,7 +1250,7 @@
         q (a concat
              (map
                #(let [f (first %)
-                       l (if (= 1 (c %)) f (last %))]
+                      l (if (= 1 (c %)) f (last %))]
                   (if (< (- l f) 2) [f l] [f s l]))
               (if
                 (= 1 (c t))
@@ -1265,14 +1265,14 @@
 ;; problem 177
 (def balancing-brackets-solution
   #(let [w first
-       x rest
-       m {\[ \]
-          \( \)
-          \{ \}}]
+         x rest
+         m {\[ \]
+            \( \)
+            \{ \}}]
     (loop [f (w %)
            r (x %)
            p []]
-    
+
       (cond
         (not f) (empty? p)
         (#{\( \{ \[} f) (recur (w r) (x r) (cons f p))
