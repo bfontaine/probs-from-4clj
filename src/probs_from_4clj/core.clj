@@ -895,16 +895,16 @@
 (defn universal-computation-engine-solution [f]
   (let [o {'+ + '- - '* * '/ /}]
     (fn [m]
-      ((fn ev [f m]
+      ((fn v [f m]
          (cond
-           (seq? f)    (apply (-> f first o) (map #(ev % m) (rest f)))
-           (number? f) f       
+           (seq? f)    (apply (-> f first o) (map #(v % m) (rest f)))
+           (number? f) f
            :else       (m f)))
        f m))))
 
 ;; problem 122
 (def read-a-binary-number-solution
-  #(. Integer parseInt % 2))
+  #(Integer/parseInt % 2))
 
 ;; problem 124
 (defn analyze-reversi-solution [& args] ;; TODO
