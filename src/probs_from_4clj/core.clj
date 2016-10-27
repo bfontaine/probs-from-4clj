@@ -490,12 +490,13 @@
   (fn [r]
     (loop [r r
            c (count r)]
-      (let [r
-            (reduce
+      (let [k reduce
+            r
+            (k
               (fn [r [a b]]
-                (reduce (fn [r [f l]]
-                          (let [r (if (= b f) (conj r [a l]) r)]
-                            (if (= l a) (conj r [f b]) r)))
+                (k (fn [r [f l]]
+                      (let [r (if (= b f) (conj r [a l]) r)]
+                        (if (= l a) (conj r [f b]) r)))
                     r
                     r))
               r
