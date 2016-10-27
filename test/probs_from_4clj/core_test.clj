@@ -465,12 +465,12 @@
      #{["father" "son"] ["father" "grandson"]
        ["uncle" "cousin"] ["son" "grandson"]}))))
 
-;(deftest can-power-set
-;  (is (= (power-set-solution #{1 :a}) #{#{1 :a} #{:a} #{} #{1}}))
-;  (is (= (power-set-solution #{}) #{#{}}))
-;  (is (= (power-set-solution #{1 2 3})
-;   #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}}))
-;  (is (= (count (power-set-solution (into #{} (range 10)))) 1024)))
+(deftest can-power-set
+  (is (= (power-set-solution #{1 :a}) #{#{1 :a} #{:a} #{} #{1}}))
+  (is (= (power-set-solution #{}) #{#{}}))
+  (is (= (power-set-solution #{1 2 3})
+   #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}}))
+  (is (= (count (power-set-solution (into #{} (range 10)))) 1024)))
 
 (deftest can-happy-numbers
   (is (= (happy-numbers-solution 7) true))

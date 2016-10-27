@@ -506,12 +506,12 @@
           (recur r d))))))
 
 ;; problem 85
-(defn power-set-solution [s] ;; TODO
+(def power-set-solution
   ;; Write a function which generates the <a
   ;; href="http://en.wikipedia.org/wiki/Power_set">power set</a> of a given
   ;; set.  The power set of a set x is the set of all subsets of x, including
   ;; the empty set and x itself.
-  nil)
+  (fn p [s] (apply clojure.set/union #{s} (map #(p (disj s %)) s))))
 
 ;; problem 86
 (defn happy-numbers-solution [n]

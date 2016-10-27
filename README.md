@@ -14,7 +14,6 @@ I’m using [lein-fore-prob][] to import problems in the project.
 
 All problems except the ones listed below are implemented.
 
-* [85](http://www.4clojure.com/problem/85)
 * [89](http://www.4clojure.com/problem/89)
 * [93](http://www.4clojure.com/problem/93)
 * [94](http://www.4clojure.com/problem/94)
