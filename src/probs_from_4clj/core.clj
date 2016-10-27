@@ -470,7 +470,7 @@
               (= (seq v) (seq w))
               (let [[a & b] v
                     [e & f] w]
-                (or 
+                (or
                   (= v w)
                   (c b f (if (= a e) 0 1))
                   (c b w 1)
@@ -651,7 +651,7 @@
         (cond
           (= a b) a
           (> a b) (recur (- a b) b)
-          (< a b) (recur a (- b a)))))
+          :else (recur a (- b a)))))
     c))
 
 ;; problem 101
