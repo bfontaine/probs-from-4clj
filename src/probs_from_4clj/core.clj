@@ -550,13 +550,14 @@
 ;; problem 91
 (def graph-connectivity-solution
   (fn [g]
-    (let [p (reduce (fn [m [a b]]
-                      (assoc m
-                             a (conj (get m a) b)
-                             b (conj (get m b) a))) {} g)]
+    (let [k reduce
+          p (k (fn [m [a b]]
+                 (assoc m
+                        a (conj (get m a) b)
+                        b (conj (get m b) a))) {} g)]
       (loop [n (into #{} (first g))
              c 0]
-        (let [n (reduce
+        (let [n (k
                   (fn [N n]
                     (into N (p n)))
                       n
