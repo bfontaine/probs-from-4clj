@@ -523,13 +523,13 @@
   (is (= 3999 (read-roman-numerals-solution "MMMCMXCIX")))
   (is (= 48 (read-roman-numerals-solution "XLVIII"))))
 
-;(deftest can-partially-flatten-a-sequence
-;  (is (= (partially-flatten-a-sequence-solution [["Do"] ["Nothing"]])
-;   [["Do"] ["Nothing"]]))
-;  (is (= (partially-flatten-a-sequence-solution [[[[:a :b]]] [[:c :d]] [:e :f]])
-;   [[:a :b] [:c :d] [:e :f]]))
-;  (is (= (partially-flatten-a-sequence-solution '((1 2)((3 4)((((5 6)))))))
-;   '((1 2)(3 4)(5 6)))))
+(deftest can-partially-flatten-a-sequence
+  (is (= (partially-flatten-a-sequence-solution [["Do"] ["Nothing"]])
+   [["Do"] ["Nothing"]]))
+  (is (= (partially-flatten-a-sequence-solution [[[[:a :b]]] [[:c :d]] [:e :f]])
+   [[:a :b] [:c :d] [:e :f]]))
+  (is (= (partially-flatten-a-sequence-solution '((1 2)((3 4)((((5 6)))))))
+   '((1 2)(3 4)(5 6)))))
 
 ;(deftest can-game-of-life
 ;  (is (= (game-of-life-solution ["      "  
