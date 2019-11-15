@@ -689,14 +689,23 @@
       (fn [[_ a]] (clojure.string/upper-case a))))
 
 ;; problem 103
-(defn generating-k-combinations-solution [k s] ;; TODO
+(def generating-k-combinations-solution
   ;; Given a sequence S consisting of n elements generate all k-combinations
   ;; of S, i.e. generate all possible sets consisting of k distinct elements
   ;; taken from S.
-  ;; 
+  ;;
   ;; The number of k-combinations for a sequence is equal to the binomial
   ;; coefficient.
-  nil)
+  (fn f
+    [k S]
+    (set
+      (if (= k 0)
+        [#{}]
+        (for [s (f (- k 1) S)
+              e S
+              :when (= k (count (conj s e)))]
+          (conj s e)))))
+  )
 
 ;; problem 104
 (defn write-roman-numerals-solution [n]

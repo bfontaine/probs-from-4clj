@@ -646,15 +646,15 @@
   (is (= (intocamelcase-solution "multi-word-key") "multiWordKey"))
   (is (= (intocamelcase-solution "leaveMeAlone") "leaveMeAlone")))
 
-;(deftest can-generating-k-combinations
-;  (is (= (generating-k-combinations-solution 1 #{4 5 6}) #{#{4} #{5} #{6}}))
-;  (is (= (generating-k-combinations-solution 10 #{4 5 6}) #{}))
-;  (is (= (generating-k-combinations-solution 2 #{0 1 2}) #{#{0 1} #{0 2} #{1 2}}))
-;  (is (= (generating-k-combinations-solution 3 #{0 1 2 3 4}) #{#{0 1 2} #{0 1 3} #{0 1 4} #{0 2 3} #{0 2 4}
-;                         #{0 3 4} #{1 2 3} #{1 2 4} #{1 3 4} #{2 3 4}}))
-;  (is (= (generating-k-combinations-solution 4 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a "abc" "efg"}}))
-;  (is (= (generating-k-combinations-solution 2 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a} #{[1 2 3] "abc"} #{[1 2 3] "efg"}
-;                                    #{:a "abc"} #{:a "efg"} #{"abc" "efg"}})))
+(deftest can-generating-k-combinations
+  (is (= (generating-k-combinations-solution 1 #{4 5 6}) #{#{4} #{5} #{6}}))
+  (is (= (generating-k-combinations-solution 10 #{4 5 6}) #{}))
+  (is (= (generating-k-combinations-solution 2 #{0 1 2}) #{#{0 1} #{0 2} #{1 2}}))
+  (is (= (generating-k-combinations-solution 3 #{0 1 2 3 4}) #{#{0 1 2} #{0 1 3} #{0 1 4} #{0 2 3} #{0 2 4}
+                         #{0 3 4} #{1 2 3} #{1 2 4} #{1 3 4} #{2 3 4}}))
+  (is (= (generating-k-combinations-solution 4 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a "abc" "efg"}}))
+  (is (= (generating-k-combinations-solution 2 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a} #{[1 2 3] "abc"} #{[1 2 3] "efg"}
+                                    #{:a "abc"} #{:a "efg"} #{"abc" "efg"}})))
 
 (deftest can-write-roman-numerals
   (is (= "I" (write-roman-numerals-solution 1)))

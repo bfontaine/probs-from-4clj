@@ -16,7 +16,6 @@ All problems except the ones listed below are implemented.
 
 * [89](http://www.4clojure.com/problem/89)
 * [94](http://www.4clojure.com/problem/94)
-* [103](http://www.4clojure.com/problem/103)
 * [112](http://www.4clojure.com/problem/112)
 * [119](http://www.4clojure.com/problem/119)
 * [124](http://www.4clojure.com/problem/124)
