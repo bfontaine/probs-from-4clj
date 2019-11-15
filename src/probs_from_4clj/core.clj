@@ -637,14 +637,22 @@
   ;                                       (op i W -1) ; (top/bottom)-left
   ;                                       (op i 1)   ; right/left
   ;
-  ; add the usual aliasing,
-  ;               repeating some operations instead of `let`ing symbols
-  ;                 to save a couple chars,
-  ;               moving everything around to minimize the number of
-  ;               (fn ...)'s
+  ; add the usual
+  ;   * aliasing,
+  ;   * repeating some operations instead of `let`ing symbols to save
+  ;     a couple chars,
+  ;   * moving everything around to minimize the number of (fn ...)'s
   ;
   ; note this doesn't work with boards where affected cells on the left/right
-  ; edges but fortunately there's none in the tests.
+  ; edges but fortunately there's none in the tests. This can be fixed in the
+  ; `:when (and ...)`.
+  ;
+  ; map shortcut:
+  ;   (if (#{2 3} n) X " ") -> (if(#{23}n)X" ")
+  ;   ({2 X, 3 X} n " ")    -> ({2X,3X}n" ")
+  ;
+  ;   (if (= n 3) X %2) -> (if(=n3)X%2)
+  ;   ({3 X} n %2)      -> ({3X}n%2)
 
   (fn [b]
     (let [A #(apply str %)
@@ -657,18 +665,14 @@
                        (map
                          #(let [n (N (for [o [(+ 1 W) W (- W 1) 1]
                                            p [- +]
-                                           :let [j (p % o)]
-                                           :when (and (< -1 j
+                                           :when (and (< -1 (p % o)
                                                          (N B))
-                                                      (= X (B j)))]
+                                                      (= X (B (p % o))))]
                                        1))]
                             (if (= %2 X)
-                              (if (#{2 3} n)
-                                X
-                                " ")
-                              (if (= 3 n)
-                                X
-                                %2)))
+                              ({2 X
+                                3 X} n " ")
+                              ({3 X} n %2)))
                          (range)
                          B)))))
   )
