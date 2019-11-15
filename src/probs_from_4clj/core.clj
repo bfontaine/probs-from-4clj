@@ -603,7 +603,48 @@
     xs))
 
 ;; problem 94
-(defn game-of-life-solution [board] ;; TODO
+(defn game-of-life-solution
+  [board]
+  ;   yyyy
+  ; ["...."  x
+  ;  "...."  x
+  ;  "...."  x
+  ;  ...]    x
+
+  (let [B (vec (apply str board))
+        H (count board)
+        W (count (first board))
+        C (* H W)
+
+        get-i (fn [i]
+                (if (or (< i 0) (>= i C))
+                  0
+                  (if (= \# (B i)) 1 0)))
+
+        B2 (map-indexed (fn [i x]
+                          (let [ng [(get-i (- i W 1)) ; topleft
+                                    (get-i (- i W)) ; top
+                                    (get-i (- i W -1)) ; topright
+                                    (get-i (- i 1)) ; left
+                                    (get-i (+ i 1)) ; right
+                                    (get-i (+ i W -1)) ; bottomleft
+                                    (get-i (+ i W)) ; bottom
+                                    (get-i (+ i W 1)) ; bottomright
+                                    ]
+                                n (apply + ng)]
+                            (if (= x \#)
+                              (if (#{2 3} n)
+                                ; 2)
+                                x
+                                ; 1) / 3)
+                                \space)
+                              (if (= 3 n)
+                                ; 4)
+                                \#
+                                x))))
+                        B)]
+    (mapv #(apply str %) (partition W B2)))
+
   ;; The <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">game of
   ;; life</a> is a cellular automaton devised by mathematician John Conway.
   ;; <br/><br/>The 'board' consists of both live (#) and dead ( ) cells. Each
@@ -616,7 +657,7 @@
   ;; exactly three live neighbours becomes a live cell, as if by
   ;; reproduction.<br/><br/>Write a function that accepts a board, and returns
   ;; a board representing the next generation of cells.
-  nil)
+  )
 
 ;; problem 95
 (defn to-tree-or-not-to-tree-solution [n]

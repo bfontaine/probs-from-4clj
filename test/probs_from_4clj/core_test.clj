@@ -531,41 +531,41 @@
   (is (= (partially-flatten-a-sequence-solution '((1 2)((3 4)((((5 6)))))))
    '((1 2)(3 4)(5 6)))))
 
-;(deftest can-game-of-life
-;  (is (= (game-of-life-solution ["      "  
-;        " ##   "
-;        " ##   "
-;        "   ## "
-;        "   ## "
-;        "      "])
-;   ["      "  
-;    " ##   "
-;    " #    "
-;    "    # "
-;    "   ## "
-;    "      "]))
-;  (is (= (game-of-life-solution ["     "
-;        "     "
-;        " ### "
-;        "     "
-;        "     "])
-;   ["     "
-;    "  #  "
-;    "  #  "
-;    "  #  "
-;    "     "]))
-;  (is (= (game-of-life-solution ["      "
-;        "      "
-;        "  ### "
-;        " ###  "
-;        "      "
-;        "      "])
-;   ["      "
-;    "   #  "
-;    " #  # "
-;    " #  # "
-;    "  #   "
-;    "      "])))
+(deftest can-game-of-life
+  (is (= (game-of-life-solution ["      "  
+        " ##   "
+        " ##   "
+        "   ## "
+        "   ## "
+        "      "])
+   ["      "  
+    " ##   "
+    " #    "
+    "    # "
+    "   ## "
+    "      "]))
+  (is (= (game-of-life-solution ["     "
+        "     "
+        " ### "
+        "     "
+        "     "])
+   ["     "
+    "  #  "
+    "  #  "
+    "  #  "
+    "     "]))
+  (is (= (game-of-life-solution ["      "
+        "      "
+        "  ### "
+        " ###  "
+        "      "
+        "      "])
+   ["      "
+    "   #  "
+    " #  # "
+    " #  # "
+    "  #   "
+    "      "])))
 
 (deftest can-to-tree-or-not-to-tree
   (is (= (to-tree-or-not-to-tree-solution '(:a (:b nil nil) nil))
