@@ -588,27 +588,19 @@
           (p #"CM" "DCCCC"))))))
 
 ;; problem 93
-(def partially-flatten-a-sequence-solution
+(defn partially-flatten-a-sequence-solution [xs]
   ;; Write a function which flattens any nested combination of sequential
   ;; things (lists, vectors, etc.), but maintains the lowest level sequential
   ;; items.  The result should be a sequence of sequences with only one level
   ;; of nesting.
-  (fn f [xs]
-    (clojure.walk/postwalk
-      (fn [x]
-        (cond
-          ; terminal
-          (not (sequential? x))
-          x
-
-          ; atom
-          (not (sequential? (first x)))
-          [x]
-
-          :else
-          (apply concat x))
-        )
-      xs)))
+  (;; copy only these two forms in 4Clojure
+   clojure.walk/postwalk
+    #(if (coll? %)
+       (if (coll? (first %))
+         (mapcat comp %)
+         [%])
+       %)
+    xs))
 
 ;; problem 94
 (defn game-of-life-solution [board] ;; TODO
