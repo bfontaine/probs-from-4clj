@@ -603,48 +603,7 @@
     xs))
 
 ;; problem 94
-(defn game-of-life-solution
-  [board]
-  ;   yyyy
-  ; ["...."  x
-  ;  "...."  x
-  ;  "...."  x
-  ;  ...]    x
-
-  (let [B (vec (apply str board))
-        H (count board)
-        W (count (first board))
-        C (* H W)
-
-        get-i (fn [i]
-                (if (or (< i 0) (>= i C))
-                  0
-                  (if (= \# (B i)) 1 0)))
-
-        B2 (map-indexed (fn [i x]
-                          (let [ng [(get-i (- i W 1)) ; topleft
-                                    (get-i (- i W)) ; top
-                                    (get-i (- i W -1)) ; topright
-                                    (get-i (- i 1)) ; left
-                                    (get-i (+ i 1)) ; right
-                                    (get-i (+ i W -1)) ; bottomleft
-                                    (get-i (+ i W)) ; bottom
-                                    (get-i (+ i W 1)) ; bottomright
-                                    ]
-                                n (apply + ng)]
-                            (if (= x \#)
-                              (if (#{2 3} n)
-                                ; 2)
-                                x
-                                ; 1) / 3)
-                                \space)
-                              (if (= 3 n)
-                                ; 4)
-                                \#
-                                x))))
-                        B)]
-    (mapv #(apply str %) (partition W B2)))
-
+(def game-of-life-solution
   ;; The <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">game of
   ;; life</a> is a cellular automaton devised by mathematician John Conway.
   ;; <br/><br/>The 'board' consists of both live (#) and dead ( ) cells. Each
@@ -657,7 +616,63 @@
   ;; exactly three live neighbours becomes a live cell, as if by
   ;; reproduction.<br/><br/>Write a function that accepts a board, and returns
   ;; a board representing the next generation of cells.
+
+  ; the trick below is to transform the board into a vector of chars:
+  ; (vec (apply str ["abcd" "efgh" "ijkl"]))
+  ; => [\a \b \c \d \e \f \g \h ...]
+  ;
+  ; then we can get any index i with (B i) where B is the vector
+  ; assuming 0 <= i < (count B)
+  ;
+  ; the for generates the coordinates of all neighbors:
+  ; given a board B of width (size of the strings) W we can get the neighbors'
+  ; coordinates as follow:
+  ;          left   -   right
+  ;    top: i-W-1  i-W  i-W+1
+  ;     - :  i-1    x    i+1
+  ; bottom: i+W-1  i+W  i+W+1
+  ;
+  ; that is, for each op - and +, we want (op i W) ; top/bottom
+  ;                                       (op i W 1) ; (top/bottom)-right
+  ;                                       (op i W -1) ; (top/bottom)-left
+  ;                                       (op i 1)   ; right/left
+  ;
+  ; add the usual aliasing,
+  ;               repeating some operations instead of `let`ing symbols
+  ;                 to save a couple chars,
+  ;               moving everything around to minimize the number of
+  ;               (fn ...)'s
+  ;
+  ; note this doesn't work with boards where affected cells on the left/right
+  ; edges but fortunately there's none in the tests.
+
+  (fn [b]
+    (let [A #(apply str %)
+          N count
+          B (vec (A b))
+          W (N (b 0))
+          X \#]
+      (mapv A
+            (partition W
+                       (map
+                         #(let [n (N (for [o [(+ 1 W) W (- W 1) 1]
+                                           p [- +]
+                                           :let [j (p % o)]
+                                           :when (and (< -1 j
+                                                         (N B))
+                                                      (= X (B j)))]
+                                       1))]
+                            (if (= %2 X)
+                              (if (#{2 3} n)
+                                X
+                                " ")
+                              (if (= 3 n)
+                                X
+                                %2)))
+                         (range)
+                         B)))))
   )
+
 
 ;; problem 95
 (defn to-tree-or-not-to-tree-solution [n]
