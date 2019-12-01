@@ -218,7 +218,7 @@
   (cond
    (= 0 n) c
    (< 0 n) (recur (dec n) (conj (vec (rest c)) (first c)))
-   :else   (recur (inc n) (vec (cons (last c) (drop-last c))))))
+   1       (recur (inc n) (vec (cons (last c) (drop-last c))))))
 
 ;; problem 45
 (def intro-to-iterate-solution
@@ -455,13 +455,12 @@
       (cond
         (= d n) (= n a)
         (< n a) false
-        :else (recur n (inc d) (if (= 0 (mod n d)) (+ a d) a))))
+        1     (recur n (inc d) (if (= 0 (mod n d)) (+ a d) a))))
     % 1 0))
 
 ;; problem 81
 (def set-intersection-solution
-  #(let [d clojure.set/difference u clojure.set/union]
-      (d (u % %2) (u (d % %2) (d %2 %)))))
+  #(into #{} (filter %2 %)))
 
 ;; problem 82
 (defn word-chains-solution [ws]
@@ -521,7 +520,7 @@
     (cond
      (= n 1) true
      (s n) false
-     :else (recur (conj s n)
+     1     (recur (conj s n)
                   (int (reduce + (map #(-> %
                                           str
                                           (Integer/parseInt)
@@ -720,7 +719,7 @@
         (cond
           (= a b) a
           (> a b) (recur (- a b) b)
-          :else (recur a (- b a)))))
+          1     (recur a (- b a)))))
     c))
 
 ;; problem 101
@@ -737,7 +736,7 @@
           (e a)    (+ c (n b))
           (e b)    (+ c (n a))
           (= (f a) (f b)) (L p q c)
-          :else (min
+          1     (min
                   (L p b i)
                   (L a q i)
                   (L p q i)))))
@@ -820,7 +819,7 @@
 
              (and (odd? a) (e b)) (recur A d w)
 
-             :else (min
+             1     (min
                       (M (+ a 2) d w)
                       (M A       d w)
                       (if (e a) (M (/ a 2) d w) i)))))
@@ -977,7 +976,7 @@
          (cond
            (seq? f)    (apply (-> f first o) (map #(v % m) (rest f)))
            (number? f) f
-           :else       (m f)))
+           1           (m f)))
        f m))))
 
 ;; problem 122
@@ -1157,7 +1156,7 @@
                   (= x y) ; lead
                     {S x
                      R m}
-                  :else %)))))
+                  1     %)))))
 
 ;; problem 143
 (defn dot-product-solution [s t]
@@ -1354,11 +1353,11 @@
       (cond
         (not f) (empty? p)
         (#{\( \{ \[} f) (recur (w r) (x r) (cons f p))
-        (#{\) \} \]} f) (cond
-                          (empty? p) nil
-                          (= (m (w p)) f) (recur (w r) (x r) (x p))
-                          :else nil)
-        :else (recur (w r) (x r) p)))))
+        (#{\) \} \]} f) (if (and
+                              (seq p)
+                              (= (m (w p)) f))
+                          (recur (w r) (x r) (x p)))
+        1     (recur (w r) (x r) p)))))
 
 ;; problem 178
 (def best-hand-solution
@@ -1397,4 +1396,4 @@
         (or
           (= p3 p4)
           (= p4 p5)) :pair
-        :else :high-card))))
+        1     :high-card))))
