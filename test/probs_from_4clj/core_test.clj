@@ -90,7 +90,7 @@
 (deftest reverse-a-sequence-solution-test
   (is (= (reverse-a-sequence-solution [1 2 3 4 5]) [5 4 3 2 1]))
   (is (= (reverse-a-sequence-solution (sorted-set 5 7 2 7)) '(7 5 2)))
-  (is (= (reverse-a-sequence-solution [[1 2][3 4][5 6]]) [[5 6][3 4][1 2]])))
+  (is (= (reverse-a-sequence-solution [[1 2] [3 4] [5 6]]) [[5 6] [3 4] [1 2]])))
 
 (deftest sum-it-all-up-solution-test
   (is (= (sum-it-all-up-solution [1 2 3]) 6))
@@ -215,9 +215,9 @@
   (is (contains? #{4 5 6} contain-yourself-solution))
   (is (contains? [1 1 1 1 1] contain-yourself-solution))
   (is (contains? {4 :a 2 :b} contain-yourself-solution)))
-  ;; this test was written for Clojure pre-1.5, it throws an exception
-  ;; with Clojure 1.5.
-  ;; (is (not (contains? '(1 2 4) contain-yourself-solution)))
+;; this test was written for Clojure pre-1.5, it throws an exception
+;; with Clojure 1.5.
+;; (is (not (contains? '(1 2 4) contain-yourself-solution)))
 
 (deftest intro-to-some-solution-test
   (is (= intro-to-some-solution (some #{2 7 6} [5 6 7 8])))
@@ -230,7 +230,7 @@
 
 (deftest split-by-type-solution-test
   (is (= (set (split-by-type-solution [1 :a 2 :b 3 :c])) #{[1 2 3] [:a :b :c]}))
-  (is (= (set (split-by-type-solution [:a "foo"  "bar" :b])) #{[:a :b] ["foo" "bar"]}))
+  (is (= (set (split-by-type-solution [:a "foo" "bar" :b])) #{[:a :b] ["foo" "bar"]}))
   (is (= (set (split-by-type-solution [[1 2] :a [3 4] 5 6 :b])) #{[[1 2] [3 4]] [:a :b] [5 6]})))
 
 (deftest advanced-destructuring-solution-test
@@ -290,14 +290,14 @@
 (deftest group-a-sequence-solution-test
   (is (= (group-a-sequence-solution #(> % 5) [1 3 6 8]) {false [1 3], true [6 8]}))
   (is (= (group-a-sequence-solution #(apply / %) [[1 2] [2 4] [4 6] [3 6]])
-   {1/2 [[1 2] [2 4] [3 6]], 2/3 [[4 6]]}))
+         {1/2 [[1 2] [2 4] [3 6]], 2/3 [[4 6]]}))
   (is (= (group-a-sequence-solution count [[1] [1 2] [3] [1 2 3] [2 3]])
-   {1 [[1] [3]], 2 [[1 2] [2 3]], 3 [[1 2 3]]})))
+         {1 [[1] [3]], 2 [[1 2] [2 3]], 3 [[1 2 3]]})))
 
 (deftest intro-to-reduce-solution-test
   (is (= 15 (reduce intro-to-reduce-solution [1 2 3 4 5])))
-  (is (=  0 (reduce intro-to-reduce-solution [])))
-  (is (=  6 (reduce intro-to-reduce-solution 1 [2 3]))))
+  (is (= 0 (reduce intro-to-reduce-solution [])))
+  (is (= 6 (reduce intro-to-reduce-solution 1 [2 3]))))
 
 (deftest black-box-testing-solution-test
   (is (= :map (black-box-testing-solution {:a 1, :b 2})))
@@ -319,60 +319,60 @@
 
 (deftest recurring-theme-solution-test
   (is (= recurring-theme-solution
-  (loop [x 5
-         result []]
-    (if (> x 0)
-      (recur (dec x) (conj result (+ 2 x)))
-      result)))))
+         (loop [x      5
+                result []]
+           (if (> x 0)
+             (recur (dec x) (conj result (+ 2 x)))
+             result)))))
 
 (deftest merge-with-a-function-solution-test
   (is (= (merge-with-a-function-solution * {:a 2, :b 3, :c 4} {:a 2} {:b 2} {:c 5})
-   {:a 4, :b 6, :c 20}))
+         {:a 4, :b 6, :c 20}))
   (is (= (merge-with-a-function-solution - {1 10, 2 20} {1 3, 2 10, 3 15})
-   {1 7, 2 10, 3 15}))
+         {1 7, 2 10, 3 15}))
   (is (= (merge-with-a-function-solution concat {:a [3], :b [6]} {:a [4 5], :c [8 9]} {:b [7]})
-   {:a [3 4 5], :b [6 7], :c [8 9]})))
+         {:a [3 4 5], :b [6 7], :c [8 9]})))
 
 (deftest word-sorting-solution-test
-  (is (= (word-sorting-solution  "Have a nice day.")
-   ["a" "day" "Have" "nice"]))
-  (is (= (word-sorting-solution  "Clojure is a fun language!")
-   ["a" "Clojure" "fun" "is" "language"]))
-  (is (= (word-sorting-solution  "Fools fall for foolish follies.")
-   ["fall" "follies" "foolish" "Fools" "for"])))
+  (is (= (word-sorting-solution "Have a nice day.")
+         ["a" "day" "Have" "nice"]))
+  (is (= (word-sorting-solution "Clojure is a fun language!")
+         ["a" "Clojure" "fun" "is" "language"]))
+  (is (= (word-sorting-solution "Fools fall for foolish follies.")
+         ["fall" "follies" "foolish" "Fools" "for"])))
 
 (deftest rearranging-code-1-solution-test
   (is (= (rearranging-code-1-solution (sort (rest (reverse [2 5 4 1 3 6]))))
-   (-> [2 5 4 1 3 6] (reverse) (rest) (sort) (rearranging-code-1-solution))
-   5)))
+         (-> [2 5 4 1 3 6] (reverse) (rest) (sort) (rearranging-code-1-solution))
+         5)))
 
 (deftest rearranging-code-2-solution-test
   (is (= (rearranging-code-2-solution (map inc (take 3 (drop 2 [2 5 4 1 3 6]))))
          (->> [2 5 4 1 3 6] (drop 2) (take 3) (map inc) (rearranging-code-2-solution))
-      11)))
+         11)))
 
 (deftest analyze-a-tic-tac-toe-board-solution-test
   (is (= nil (analyze-a-tic-tac-toe-board-solution [[:e :e :e]
-            [:e :e :e]
-            [:e :e :e]])))
+                                                    [:e :e :e]
+                                                    [:e :e :e]])))
   (is (= :x (analyze-a-tic-tac-toe-board-solution [[:x :e :o]
-           [:x :e :e]
-           [:x :e :o]])))
+                                                   [:x :e :e]
+                                                   [:x :e :o]])))
   (is (= :o (analyze-a-tic-tac-toe-board-solution [[:e :x :e]
-           [:o :o :o]
-           [:x :e :x]])))
+                                                   [:o :o :o]
+                                                   [:x :e :x]])))
   (is (= nil (analyze-a-tic-tac-toe-board-solution [[:x :e :o]
-            [:x :x :e]
-            [:o :x :o]])))
+                                                    [:x :x :e]
+                                                    [:o :x :o]])))
   (is (= :x (analyze-a-tic-tac-toe-board-solution [[:x :e :e]
-           [:o :x :e]
-           [:o :e :x]])))
+                                                   [:o :x :e]
+                                                   [:o :e :x]])))
   (is (= :o (analyze-a-tic-tac-toe-board-solution [[:x :e :o]
-           [:x :o :e]
-           [:o :e :x]])))
+                                                   [:x :o :e]
+                                                   [:o :e :x]])))
   (is (= nil (analyze-a-tic-tac-toe-board-solution [[:x :o :x]
-            [:x :o :x]
-            [:o :x :o]]))))
+                                                    [:x :o :x]
+                                                    [:o :x :o]]))))
 
 (deftest filter-perfect-squares-solution-test
   (is (= (filter-perfect-squares-solution "4,5,6,7,8,9") "4,9"))
@@ -386,41 +386,41 @@
 
 (deftest intro-to-trampoline-solution-test
   (is (= intro-to-trampoline-solution
-   (letfn
-     [(foo [x y] #(bar (conj x y) y))
-      (bar [x y] (if (> (last x) 10)
-                   x
-                   #(foo x (+ 2 y))))]
-     (trampoline foo [] 1)))))
+         (letfn
+           [(foo [x y] #(bar (conj x y) y))
+            (bar [x y] (if (> (last x) 10)
+                         x
+                         #(foo x (+ 2 y))))]
+           (trampoline foo [] 1)))))
 
 (deftest anagram-finder-solution-test
   (is (= (anagram-finder-solution ["meat" "mat" "team" "mate" "eat"])
-   #{#{"meat" "team" "mate"}}))
+         #{#{"meat" "team" "mate"}}))
   (is (= (anagram-finder-solution ["veer" "lake" "item" "kale" "mite" "ever"])
-   #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})))
+         #{#{"veer" "ever"} #{"lake" "kale"} #{"mite" "item"}})))
 
 (deftest reimplement-trampoline-solution-test
   (is (= (letfn [(triple [x] #(sub-two (* 3 x)))
-          (sub-two [x] #(stop?(- x 2)))
-          (stop? [x] (if (> x 50) x #(triple x)))]
-    (reimplement-trampoline-solution triple 2))
-  82))
+                 (sub-two [x] #(stop? (- x 2)))
+                 (stop? [x] (if (> x 50) x #(triple x)))]
+           (reimplement-trampoline-solution triple 2))
+         82))
   (is (= (letfn [(my-even? [x] (if (zero? x) true #(my-odd? (dec x))))
-          (my-odd? [x] (if (zero? x) false #(my-even? (dec x))))]
-    (map (partial reimplement-trampoline-solution my-even?) (range 6)))
-  [true false true false true false])))
+                 (my-odd? [x] (if (zero? x) false #(my-even? (dec x))))]
+           (map (partial reimplement-trampoline-solution my-even?) (range 6)))
+         [true false true false true false])))
 
 (deftest triangle-minimal-path-solution-test
   (is (= 7 (triangle-minimal-path-solution '([1]
-          [2 4]
-         [5 1 4]
-        [2 3 4 5])))) ; 1->2->1->3
+                                             [2 4]
+                                             [5 1 4]
+                                             [2 3 4 5]))))            ; 1->2->1->3
   (is (= 20 (triangle-minimal-path-solution '([3]
-           [2 4]
-          [1 9 3]
-         [9 9 2 4]
-        [4 6 6 7 8]
-       [5 7 3 5 1 4])))) ; 3->4->3->2->7->1
+                                              [2 4]
+                                              [1 9 3]
+                                              [9 9 2 4]
+                                              [4 6 6 7 8]
+                                              [5 7 3 5 1 4]))))       ; 3->4->3->2->7->1
   )
 
 (deftest perfect-numbers-solution-test
@@ -453,23 +453,23 @@
 
 (deftest transitive-closure-solution-test
   (is (let [divides #{[8 4] [9 3] [4 2] [27 9]}]
-  (= (transitive-closure-solution divides) #{[4 2] [8 4] [8 2] [9 3] [27 9] [27 3]})))
+        (= (transitive-closure-solution divides) #{[4 2] [8 4] [8 2] [9 3] [27 9] [27 3]})))
   (is (let [more-legs
-      #{["cat" "man"] ["man" "snake"] ["spider" "cat"]}]
-  (= (transitive-closure-solution more-legs)
-     #{["cat" "man"] ["cat" "snake"] ["man" "snake"]
-       ["spider" "cat"] ["spider" "man"] ["spider" "snake"]})))
+            #{["cat" "man"] ["man" "snake"] ["spider" "cat"]}]
+        (= (transitive-closure-solution more-legs)
+           #{["cat" "man"] ["cat" "snake"] ["man" "snake"]
+             ["spider" "cat"] ["spider" "man"] ["spider" "snake"]})))
   (is (let [progeny
-      #{["father" "son"] ["uncle" "cousin"] ["son" "grandson"]}]
-  (= (transitive-closure-solution progeny)
-     #{["father" "son"] ["father" "grandson"]
-       ["uncle" "cousin"] ["son" "grandson"]}))))
+            #{["father" "son"] ["uncle" "cousin"] ["son" "grandson"]}]
+        (= (transitive-closure-solution progeny)
+           #{["father" "son"] ["father" "grandson"]
+             ["uncle" "cousin"] ["son" "grandson"]}))))
 
 (deftest power-set-solution-test
   (is (= (power-set-solution #{1 :a}) #{#{1 :a} #{:a} #{} #{1}}))
   (is (= (power-set-solution #{}) #{#{}}))
   (is (= (power-set-solution #{1 2 3})
-   #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}}))
+         #{#{} #{1} #{2} #{3} #{1 2} #{1 3} #{2 3} #{1 2 3}}))
   (is (= (count (power-set-solution (into #{} (range 10)))) 1024)))
 
 (deftest happy-numbers-solution-test
@@ -497,25 +497,25 @@
 
 (deftest cartesian-product-solution-test
   (is (= (cartesian-product-solution #{"ace" "king" "queen"} #{"&#9824;" "&#9829;" "&#9830;" "&#9827;"})
-   #{["ace"   "&#9824;"] ["ace"   "&#9829;"] ["ace"   "&#9830;"] ["ace"   "&#9827;"]
-     ["king"  "&#9824;"] ["king"  "&#9829;"] ["king"  "&#9830;"] ["king"  "&#9827;"]
-     ["queen" "&#9824;"] ["queen" "&#9829;"] ["queen" "&#9830;"] ["queen" "&#9827;"]}))
+         #{["ace" "&#9824;"] ["ace" "&#9829;"] ["ace" "&#9830;"] ["ace" "&#9827;"]
+           ["king" "&#9824;"] ["king" "&#9829;"] ["king" "&#9830;"] ["king" "&#9827;"]
+           ["queen" "&#9824;"] ["queen" "&#9829;"] ["queen" "&#9830;"] ["queen" "&#9827;"]}))
   (is (= (cartesian-product-solution #{1 2 3} #{4 5})
-   #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]}))
+         #{[1 4] [2 4] [3 4] [1 5] [2 5] [3 5]}))
   (is (= 300 (count (cartesian-product-solution (into #{} (range 10))
-                  (into #{} (range 30)))))))
+                                                (into #{} (range 30)))))))
 
 (deftest graph-connectivity-solution-test
   (is (= true (graph-connectivity-solution #{[:a :a]})))
   (is (= true (graph-connectivity-solution #{[:a :b]})))
   (is (= false (graph-connectivity-solution #{[1 2] [2 3] [3 1]
-               [4 5] [5 6] [6 4]})))
+                                              [4 5] [5 6] [6 4]})))
   (is (= true (graph-connectivity-solution #{[1 2] [2 3] [3 1]
-              [4 5] [5 6] [6 4] [3 4]})))
+                                             [4 5] [5 6] [6 4] [3 4]})))
   (is (= false (graph-connectivity-solution #{[:a :b] [:b :c] [:c :d]
-               [:x :y] [:d :a] [:b :e]})))
+                                              [:x :y] [:d :a] [:b :e]})))
   (is (= true (graph-connectivity-solution #{[:a :b] [:b :c] [:c :d]
-              [:x :y] [:d :a] [:b :e] [:x :a]}))))
+                                             [:x :y] [:d :a] [:b :e] [:x :a]}))))
 
 (deftest read-roman-numerals-solution-test
   (is (= 14 (read-roman-numerals-solution "XIV")))
@@ -525,98 +525,98 @@
 
 (deftest partially-flatten-a-sequence-solution-test
   (is (= (partially-flatten-a-sequence-solution [["Do"] ["Nothing"]])
-   [["Do"] ["Nothing"]]))
+         [["Do"] ["Nothing"]]))
   (is (= (partially-flatten-a-sequence-solution [[[[:a :b]]] [[:c :d]] [:e :f]])
-   [[:a :b] [:c :d] [:e :f]]))
-  (is (= (partially-flatten-a-sequence-solution '((1 2)((3 4)((((5 6)))))))
-   '((1 2)(3 4)(5 6)))))
+         [[:a :b] [:c :d] [:e :f]]))
+  (is (= (partially-flatten-a-sequence-solution '((1 2) ((3 4) ((((5 6)))))))
+         '((1 2) (3 4) (5 6)))))
 
 (deftest game-of-life-solution-test
-  (is (= (game-of-life-solution ["      "  
-        " ##   "
-        " ##   "
-        "   ## "
-        "   ## "
-        "      "])
-   ["      "  
-    " ##   "
-    " #    "
-    "    # "
-    "   ## "
-    "      "]))
-  (is (= (game-of-life-solution ["     "
-        "     "
-        " ### "
-        "     "
-        "     "])
-   ["     "
-    "  #  "
-    "  #  "
-    "  #  "
-    "     "]))
   (is (= (game-of-life-solution ["      "
-        "      "
-        "  ### "
-        " ###  "
-        "      "
-        "      "])
-   ["      "
-    "   #  "
-    " #  # "
-    " #  # "
-    "  #   "
-    "      "])))
+                                 " ##   "
+                                 " ##   "
+                                 "   ## "
+                                 "   ## "
+                                 "      "])
+         ["      "
+          " ##   "
+          " #    "
+          "    # "
+          "   ## "
+          "      "]))
+  (is (= (game-of-life-solution ["     "
+                                 "     "
+                                 " ### "
+                                 "     "
+                                 "     "])
+         ["     "
+          "  #  "
+          "  #  "
+          "  #  "
+          "     "]))
+  (is (= (game-of-life-solution ["      "
+                                 "      "
+                                 "  ### "
+                                 " ###  "
+                                 "      "
+                                 "      "])
+         ["      "
+          "   #  "
+          " #  # "
+          " #  # "
+          "  #   "
+          "      "])))
 
 (deftest to-tree-or-not-to-tree-solution-test
   (is (= (to-tree-or-not-to-tree-solution '(:a (:b nil nil) nil))
-   true))
+         true))
   (is (= (to-tree-or-not-to-tree-solution '(:a (:b nil nil)))
-   false))
+         false))
   (is (= (to-tree-or-not-to-tree-solution [1 nil [2 [3 nil nil] [4 nil nil]]])
-   true))
+         true))
   (is (= (to-tree-or-not-to-tree-solution [1 [2 nil nil] [3 nil nil] [4 nil nil]])
-   false))
+         false))
   (is (= (to-tree-or-not-to-tree-solution [1 [2 [3 [4 nil nil] nil] nil] nil])
-   true))
+         true))
   (is (= (to-tree-or-not-to-tree-solution [1 [2 [3 [4 false nil] nil] nil] nil])
-   false))
+         false))
   (is (= (to-tree-or-not-to-tree-solution '(:a nil ()))
-   false)))
+         false)))
 
 (deftest beauty-is-symmetry-solution-test
   (is (= (beauty-is-symmetry-solution '(:a (:b nil nil) (:b nil nil))) true))
   (is (= (beauty-is-symmetry-solution '(:a (:b nil nil) nil)) false))
   (is (= (beauty-is-symmetry-solution '(:a (:b nil nil) (:c nil nil))) false))
   (is (= (beauty-is-symmetry-solution [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
-          [2 [3 nil [4 [6 nil nil] [5 nil nil]]] nil]])
-   true))
+                                       [2 [3 nil [4 [6 nil nil] [5 nil nil]]] nil]])
+         true))
   (is (= (beauty-is-symmetry-solution [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
-          [2 [3 nil [4 [5 nil nil] [6 nil nil]]] nil]])
-   false))
+                                       [2 [3 nil [4 [5 nil nil] [6 nil nil]]] nil]])
+         false))
   (is (= (beauty-is-symmetry-solution [1 [2 nil [3 [4 [5 nil nil] [6 nil nil]] nil]]
-          [2 [3 nil [4 [6 nil nil] nil]] nil]])
-   false)))
+                                       [2 [3 nil [4 [6 nil nil] nil]] nil]])
+         false)))
 
 (deftest pascal-s-triangle-solution-test
   (is (= (pascal-s-triangle-solution 1) [1]))
   (is (= (map pascal-s-triangle-solution (range 1 6))
-   [     [1]
-        [1 1]
-       [1 2 1]
-      [1 3 3 1]
-     [1 4 6 4 1]]))
+         [[1]
+          [1 1]
+          [1 2 1]
+          [1 3 3 1]
+          [1 4 6 4 1]]))
   (is (= (pascal-s-triangle-solution 11)
-   [1 10 45 120 210 252 210 120 45 10 1])))
+         [1 10 45 120 210 252 210 120 45 10 1])))
 
 (deftest equivalence-classes-solution-test
   (is (= (equivalence-classes-solution #(* % %) #{-2 -1 0 1 2})
-   #{#{0} #{1 -1} #{2 -2}}))
-  (is (= (equivalence-classes-solution #(rem % 3) #{0 1 2 3 4 5 })
-   #{#{0 3} #{1 4} #{2 5}}))
+         #{#{0} #{1 -1} #{2 -2}}))
+  (is (= (equivalence-classes-solution #(rem % 3) #{0 1 2 3 4 5})
+         #{#{0 3} #{1 4} #{2 5}}))
   (is (= (equivalence-classes-solution identity #{0 1 2 3 4})
-   #{#{0} #{1} #{2} #{3} #{4}}))
+         #{#{0} #{1} #{2} #{3} #{4}}))
   (is (= (equivalence-classes-solution (constantly true) #{0 1 2 3 4})
-   #{#{0 1 2 3 4}})))
+         #{#{0 1 2 3 4}})))
 
 (deftest product-digits-solution-test
   (is (= (product-digits-solution 1 1) [1]))
@@ -651,10 +651,10 @@
   (is (= (generating-k-combinations-solution 10 #{4 5 6}) #{}))
   (is (= (generating-k-combinations-solution 2 #{0 1 2}) #{#{0 1} #{0 2} #{1 2}}))
   (is (= (generating-k-combinations-solution 3 #{0 1 2 3 4}) #{#{0 1 2} #{0 1 3} #{0 1 4} #{0 2 3} #{0 2 4}
-                         #{0 3 4} #{1 2 3} #{1 2 4} #{1 3 4} #{2 3 4}}))
+                                                               #{0 3 4} #{1 2 3} #{1 2 4} #{1 3 4} #{2 3 4}}))
   (is (= (generating-k-combinations-solution 4 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a "abc" "efg"}}))
   (is (= (generating-k-combinations-solution 2 #{[1 2 3] :a "abc" "efg"}) #{#{[1 2 3] :a} #{[1 2 3] "abc"} #{[1 2 3] "efg"}
-                                    #{:a "abc"} #{:a "efg"} #{"abc" "efg"}})))
+                                                                            #{:a "abc"} #{:a "efg"} #{"abc" "efg"}})))
 
 (deftest write-roman-numerals-solution-test
   (is (= "I" (write-roman-numerals-solution 1)))
@@ -672,16 +672,16 @@
   (is (= {:a [1 2 3], :b [], :c [4]} (identify-keys-and-values-solution [:a 1 2 3 :b :c 4]))))
 
 (deftest number-maze-solution-test
-  (is (= 1 (number-maze-solution 1 1)))  ; 1
-  (is (= 3 (number-maze-solution 3 12))) ; 3 6 12
-  (is (= 3 (number-maze-solution 12 3))) ; 12 6 3
-  (is (= 3 (number-maze-solution 5 9)))  ; 5 7 9
-  (is (= 9 (number-maze-solution 9 2)))  ; 9 18 20 10 12 6 8 4 2
-  (is (= 5 (number-maze-solution 9 12)))) ; 9 11 22 24 12
+  (is (= 1 (number-maze-solution 1 1)))                               ; 1
+  (is (= 3 (number-maze-solution 3 12)))                              ; 3 6 12
+  (is (= 3 (number-maze-solution 12 3)))                              ; 12 6 3
+  (is (= 3 (number-maze-solution 5 9)))                               ; 5 7 9
+  (is (= 9 (number-maze-solution 9 2)))                               ; 9 18 20 10 12 6 8 4 2
+  (is (= 5 (number-maze-solution 9 12))))                             ; 9 11 22 24 12
 
 (deftest simple-closures-solution-test
   (is (= 256 ((simple-closures-solution 2) 16),
-       ((simple-closures-solution 8) 2)))
+         ((simple-closures-solution 8) 2)))
   (is (= [1 8 27 64] (map (simple-closures-solution 3) [1 2 3 4])))
   (is (= [1 2 4 8 16] (map #((simple-closures-solution %) 2) [0 1 2 3 4]))))
 
@@ -689,9 +689,9 @@
   (is (= 3 (lazy-searching-solution [3 4 5])))
   (is (= 4 (lazy-searching-solution [1 2 3 4 5 6 7] [0.5 3/2 4 19])))
   (is (= 7 (lazy-searching-solution (range) (range 0 100 7/6) [2 3 5 7 11 13])))
-  (is (= 64 (lazy-searching-solution (map #(* % % %) (range)) ;; perfect cubes
-          (filter #(zero? (bit-and % (dec %))) (range)) ;; powers of 2
-          (iterate inc 20))))) ;; at least as large as 20
+  (is (= 64 (lazy-searching-solution (map #(* % % %) (range))         ;; perfect cubes
+                                     (filter #(zero? (bit-and % (dec %))) (range)) ;; powers of 2
+                                     (iterate inc 20)))))             ;; at least as large as 20
 
 (deftest sequence-of-pronunciations-solution-test
   (is (= [[1 1] [2 1] [1 2 1 1]] (take 3 (sequence-of-pronunciations-solution [1]))))
@@ -700,19 +700,19 @@
   (is (= 338 (count (nth (sequence-of-pronunciations-solution [3 2]) 15)))))
 
 (deftest crossword-puzzle-solution-test
-  (is (= true  (crossword-puzzle-solution "the" ["_ # _ _ e"])))
+  (is (= true (crossword-puzzle-solution "the" ["_ # _ _ e"])))
   (is (= false (crossword-puzzle-solution "the" ["c _ _ _"
-                    "d _ # e"
-                    "r y _ _"])))
-  (is (= true  (crossword-puzzle-solution "joy" ["c _ _ _"
-                    "d _ # e"
-                    "r y _ _"])))
+                                                 "d _ # e"
+                                                 "r y _ _"])))
+  (is (= true (crossword-puzzle-solution "joy" ["c _ _ _"
+                                                "d _ # e"
+                                                "r y _ _"])))
   (is (= false (crossword-puzzle-solution "joy" ["c o n j"
-                    "_ _ y _"
-                    "r _ _ #"])))
-  (is (= true  (crossword-puzzle-solution "clojure" ["_ _ _ # j o y"
-                        "_ _ o _ _ _ _"
-                        "_ _ f _ # _ _"]))))
+                                                 "_ _ y _"
+                                                 "r _ _ #"])))
+  (is (= true (crossword-puzzle-solution "clojure" ["_ _ _ # j o y"
+                                                    "_ _ o _ _ _ _"
+                                                    "_ _ f _ # _ _"]))))
 
 ;(deftest sequs-horribilis-solution-test
 ;  (is (=  (sequs-horribilis-solution 10 [1 2 [3 [4 5] 6] 7])
@@ -737,18 +737,18 @@
   (is (= '(1) (seq (apply making-data-dance-solution (repeat 5 1)))))
   (is (= "1, 1, 1, 1, 1" (str (apply making-data-dance-solution (repeat 5 1)))))
   (is (and (= nil (seq (making-data-dance-solution)))
-     (=  "" (str (making-data-dance-solution))))))
+           (= "" (str (making-data-dance-solution))))))
 
 (deftest global-take-while-solution-test
   (is (= [2 3 5 7 11 13]
-   (global-take-while-solution 4 #(= 2 (mod % 3))
-         [2 3 5 7 11 13 17 19 23])))
+         (global-take-while-solution 4 #(= 2 (mod % 3))
+                                     [2 3 5 7 11 13 17 19 23])))
   (is (= ["this" "is" "a" "sentence"]
-   (global-take-while-solution 3 #(some #{\i} %)
-         ["this" "is" "a" "sentence" "i" "wrote"])))
+         (global-take-while-solution 3 #(some #{\i} %)
+                                     ["this" "is" "a" "sentence" "i" "wrote"])))
   (is (= ["this" "is"]
-   (global-take-while-solution 1 #{"a"}
-         ["this" "is" "a" "sentence" "i" "wrote"]))))
+         (global-take-while-solution 1 #{"a"}
+                                     ["this" "is" "a" "sentence" "i" "wrote"]))))
 
 (deftest the-balance-of-n-solution-test
   (is (= true (the-balance-of-n-solution 11)))
@@ -759,7 +759,7 @@
   (is (= true (the-balance-of-n-solution 89098)))
   (is (= true (the-balance-of-n-solution 89089)))
   (is (= (take 20 (filter the-balance-of-n-solution (range)))
-   [0 1 2 3 4 5 6 7 8 9 11 22 33 44 55 66 77 88 99 101])  ))
+         [0 1 2 3 4 5 6 7 8 9 11 22 33 44 55 66 77 88 99 101])))
 
 (deftest prime-sandwich-solution-test
   (is (= false (prime-sandwich-solution 4)))
@@ -768,13 +768,13 @@
 
 (deftest re-implement-map-solution-test
   (is (= [3 4 5 6 7]
-   (re-implement-map-solution inc [2 3 4 5 6])))
+         (re-implement-map-solution inc [2 3 4 5 6])))
   (is (= (repeat 10 nil)
-   (re-implement-map-solution (fn [_] nil) (range 10))))
+         (re-implement-map-solution (fn [_] nil) (range 10))))
   (is (= [1000000 1000001]
-   (->> (re-implement-map-solution inc (range))
-        (drop (dec 1000000))
-        (take 2)))))
+         (->> (re-implement-map-solution inc (range))
+              (drop (dec 1000000))
+              (take 2)))))
 
 ;(deftest win-at-tic-tac-toe-solution-test
 ;  (is (= (win-at-tic-tac-toe-solution :x [[:o :e :e] 
@@ -806,26 +806,26 @@
 
 (deftest universal-computation-engine-solution-test
   (is (= 2 ((universal-computation-engine-solution '(/ a b))
-      '{b 8 a 16})))
+            '{b 8 a 16})))
   (is (= 8 ((universal-computation-engine-solution '(+ a b 2))
-      '{a 2 b 4})))
+            '{a 2 b 4})))
   (is (= [6 0 -4]
-     (map (universal-computation-engine-solution '(* (+ 2 a)
-  	              (- 10 b)))
-	        '[{a 1 b 8}
-	          {b 5 a -2}
-	          {a 2 b 11}])))
+         (map (universal-computation-engine-solution '(* (+ 2 a)
+                                                         (- 10 b)))
+              '[{a 1 b 8}
+                {b 5 a -2}
+                {a 2 b 11}])))
   (is (= 1 ((universal-computation-engine-solution '(/ (+ x 2)
-              (* 3 (+ y 1))))
-      '{x 4 y 1}))))
+                                                       (* 3 (+ y 1))))
+            '{x 4 y 1}))))
 
 (deftest read-a-binary-number-solution-test
-  (is (= 0     (read-a-binary-number-solution "0")))
-  (is (= 7     (read-a-binary-number-solution "111")))
-  (is (= 8     (read-a-binary-number-solution "1000")))
-  (is (= 9     (read-a-binary-number-solution "1001")))
-  (is (= 255   (read-a-binary-number-solution "11111111")))
-  (is (= 1365  (read-a-binary-number-solution "10101010101")))
+  (is (= 0 (read-a-binary-number-solution "0")))
+  (is (= 7 (read-a-binary-number-solution "111")))
+  (is (= 8 (read-a-binary-number-solution "1000")))
+  (is (= 9 (read-a-binary-number-solution "1001")))
+  (is (= 255 (read-a-binary-number-solution "11111111")))
+  (is (= 1365 (read-a-binary-number-solution "10101010101")))
   (is (= 65535 (read-a-binary-number-solution "1111111111111111"))))
 
 ;(deftest analyze-reversi-solution-test
@@ -852,7 +852,7 @@
 
 (deftest through-the-looking-class-solution-test
   (is (let [x through-the-looking-class-solution]
-  (and (= (class x) x) x))))
+        (and (= (class x) x) x))))
 
 ;(deftest love-triangle-solution-test
 ;  (is (= 10 (love-triangle-solution [15 15 15 15 15])))
@@ -903,8 +903,8 @@
   (is (= {:suit :heart :rank 3} (recognize-playing-cards-solution "H5")))
   (is (= {:suit :club :rank 12} (recognize-playing-cards-solution "CA")))
   (is (= (range 13) (map (comp :rank recognize-playing-cards-solution str)
-                   '[S2 S3 S4 S5 S6 S7
-                     S8 S9 ST SJ SQ SK SA]))))
+                         '[S2 S3 S4 S5 S6 S7
+                           S8 S9 ST SJ SQ SK SA]))))
 
 ;(deftest tree-reparenting-solution-test
 ;  (is (= '(n)
@@ -962,61 +962,61 @@
 ;                 (n)
 ;                 (o))))))))
 
-;(deftest sum-some-set-subsets-solution-test
-;  (is (= true  (sum-some-set-subsets-solution #{-1 1 99}
-;             #{-2 2 888}
-;             #{-3 3 7777}))) ; ex. all sets have a subset which sums to zero
-;  (is (= false (sum-some-set-subsets-solution #{1}
-;             #{2}
-;             #{3}
-;             #{4})))
-;  (is (= true  (sum-some-set-subsets-solution #{1})))
-;  (is (= false (sum-some-set-subsets-solution #{1 -3 51 9}
-;             #{0}
-;             #{9 2 81 33})))
-;  (is (= true  (sum-some-set-subsets-solution #{1 3 5}
-;             #{9 11 4}
-;             #{-3 12 3}
-;             #{-3 4 -2 10})))
-;  (is (= false (sum-some-set-subsets-solution #{-1 -2 -3 -4 -5 -6}
-;             #{1 2 3 4 5 6 7 8 9})))
-;  (is (= true  (sum-some-set-subsets-solution #{1 3 5 7}
-;             #{2 4 6 8})))
-;  (is (= true  (sum-some-set-subsets-solution #{-1 3 -5 7 -9 11 -13 15}
-;             #{1 -3 5 -7 9 -11 13 -15}
-;             #{1 -1 2 -2 4 -4 8 -8})))
-;  (is (= true  (sum-some-set-subsets-solution #{-10 9 -8 7 -6 5 -4 3 -2 1}
-;             #{10 -9 8 -7 6 -5 4 -3 2 -1}))))
+(deftest sum-some-set-subsets-solution-test
+  (is (= true (sum-some-set-subsets-solution #{-1 1 99}
+                                             #{-2 2 888}
+                                             #{-3 3 7777})))          ; ex. all sets have a subset which sums to zero
+  (is (= false (sum-some-set-subsets-solution #{1}
+                                              #{2}
+                                              #{3}
+                                              #{4})))
+  (is (= true (sum-some-set-subsets-solution #{1})))
+  (is (= false (sum-some-set-subsets-solution #{1 -3 51 9}
+                                              #{0}
+                                              #{9 2 81 33})))
+  (is (= true (sum-some-set-subsets-solution #{1 3 5}
+                                             #{9 11 4}
+                                             #{-3 12 3}
+                                             #{-3 4 -2 10})))
+  (is (= false (sum-some-set-subsets-solution #{-1 -2 -3 -4 -5 -6}
+                                              #{1 2 3 4 5 6 7 8 9})))
+  (is (= true (sum-some-set-subsets-solution #{1 3 5 7}
+                                             #{2 4 6 8})))
+  (is (= true (sum-some-set-subsets-solution #{-1 3 -5 7 -9 11 -13 15}
+                                             #{1 -3 5 -7 9 -11 13 -15}
+                                             #{1 -1 2 -2 4 -4 8 -8})))
+  (is (= true (sum-some-set-subsets-solution #{-10 9 -8 7 -6 5 -4 3 -2 1}
+                                             #{10 -9 8 -7 6 -5 4 -3 2 -1}))))
 
 (deftest insert-between-two-items-solution-test
   (is (= '(1 :less 6 :less 7 4 3) (insert-between-two-items-solution < :less [1 6 7 4 3])))
   (is (= '(2) (insert-between-two-items-solution > :more [2])))
-  (is (= [0 1 :x 2 :x 3 :x 4]  (insert-between-two-items-solution #(and (pos? %) (< % %2)) :x (range 5))))
+  (is (= [0 1 :x 2 :x 3 :x 4] (insert-between-two-items-solution #(and (pos? %) (< % %2)) :x (range 5))))
   (is (empty? (insert-between-two-items-solution > :more ())))
   (is (= [0 1 :same 1 2 3 :same 5 8 13 :same 21]
-   (take 12 (->> [0 1]
-                 (iterate (fn [[a b]] [b (+ a b)]))
-                 (map first) ; fibonacci numbers
-                 (insert-between-two-items-solution (fn [a b] ; both even or both odd
-                       (= (mod a 2) (mod b 2)))
-                     :same))))))
+         (take 12 (->> [0 1]
+                       (iterate (fn [[a b]] [b (+ a b)]))
+                       (map first)                                    ; fibonacci numbers
+                       (insert-between-two-items-solution (fn [a b]   ; both even or both odd
+                                                            (= (mod a 2) (mod b 2)))
+                                                          :same))))))
 
 (deftest a-nil-key-solution-test
-  (is (true?  (a-nil-key-solution :a {:a nil :b 2})))
+  (is (true? (a-nil-key-solution :a {:a nil :b 2})))
   (is (false? (a-nil-key-solution :b {:a nil :b 2})))
   (is (false? (a-nil-key-solution :c {:a nil :b 2}))))
 
 (deftest infix-calculator-solution-test
-  (is (= 7  (infix-calculator-solution 2 + 5)))
+  (is (= 7 (infix-calculator-solution 2 + 5)))
   (is (= 42 (infix-calculator-solution 38 + 48 - 2 / 2)))
-  (is (= 8  (infix-calculator-solution 10 / 2 - 1 * 2)))
+  (is (= 8 (infix-calculator-solution 10 / 2 - 1 * 2)))
   (is (= 72 (infix-calculator-solution 20 / 2 + 2 + 4 + 8 - 6 - 10 * 9))))
 
 (deftest digits-and-bases-solution-test
   (is (= [1 2 3 4 5 0 1] (digits-and-bases-solution 1234501 10)))
   (is (= [0] (digits-and-bases-solution 0 11)))
   (is (= [1 0 0 1] (digits-and-bases-solution 9 2)))
-  (is (= [1 0] (let [n (rand-int 100000)](digits-and-bases-solution n n))))
+  (is (= [1 0] (let [n (rand-int 100000)] (digits-and-bases-solution n n))))
   (is (= [16 18 5 24 15 1] (digits-and-bases-solution Integer/MAX_VALUE 42))))
 
 ;(deftest squares-squared-solution-test
@@ -1116,15 +1116,15 @@
 
 (deftest tricky-card-games-solution-test
   (is (let [notrump (tricky-card-games-solution nil)]
-  (and (= {:suit :club :rank 9}  (notrump [{:suit :club :rank 4}
-                                           {:suit :club :rank 9}]))
-       (= {:suit :spade :rank 2} (notrump [{:suit :spade :rank 2}
-                                           {:suit :club :rank 10}])))))
+        (and (= {:suit :club :rank 9} (notrump [{:suit :club :rank 4}
+                                                {:suit :club :rank 9}]))
+             (= {:suit :spade :rank 2} (notrump [{:suit :spade :rank 2}
+                                                 {:suit :club :rank 10}])))))
   (is (= {:suit :club :rank 10} ((tricky-card-games-solution :club) [{:suit :spade :rank 2}
-                                       {:suit :club :rank 10}])))
+                                                                     {:suit :club :rank 10}])))
   (is (= {:suit :heart :rank 8}
-   ((tricky-card-games-solution :heart) [{:suit :heart :rank 6} {:suit :heart :rank 8}
-                 {:suit :diamond :rank 10} {:suit :heart :rank 4}]))))
+         ((tricky-card-games-solution :heart) [{:suit :heart :rank 6} {:suit :heart :rank 8}
+                                               {:suit :diamond :rank 10} {:suit :heart :rank 4}]))))
 
 (deftest dot-product-solution-test
   (is (= 0 (dot-product-solution [0 1 0] [1 0 0])))
@@ -1139,27 +1139,27 @@
 
 (deftest for-the-win-solution-test
   (is (= for-the-win-solution (for [x (range 40)
-            :when (= 1 (rem x 4))]
-        x)))
+                                    :when (= 1 (rem x 4))]
+                                x)))
   (is (= for-the-win-solution (for [x (iterate #(+ 4 %) 0)
-            :let [z (inc x)]
-            :while (< z 40)]
-        z)))
+                                    :let [z (inc x)]
+                                    :while (< z 40)]
+                                z)))
   (is (= for-the-win-solution (for [[x y] (partition 2 (range 20))]
-        (+ x y)))))
+                                (+ x y)))))
 
 (deftest trees-into-tables-solution-test
   (is (= (trees-into-tables-solution '{a {p 1, q 2}
-         b {m 3, n 4}})
-   '{[a p] 1, [a q] 2
-     [b m] 3, [b n] 4}))
+                                       b {m 3, n 4}})
+         '{[a p] 1, [a q] 2
+           [b m] 3, [b n] 4}))
   (is (= (trees-into-tables-solution '{[1] {a b c d}
-         [2] {q r s t u v w x}})
-   '{[[1] a] b, [[1] c] d,
-     [[2] q] r, [[2] s] t,
-     [[2] u] v, [[2] w] x}))
+                                       [2] {q r s t u v w x}})
+         '{[[1] a] b, [[1] c] d,
+           [[2] q] r, [[2] s] t,
+           [[2] u] v, [[2] w] x}))
   (is (= (trees-into-tables-solution '{m {1 [a b c] 3 nil}})
-   '{[m 1] [a b c], [m 3] nil})))
+         '{[m 1] [a b c], [m 3] nil})))
 
 (deftest pascal-s-trapezoid-solution-test
   (is (= (second (pascal-s-trapezoid-solution [2 3 2])) [2 5 5 2]))
@@ -1173,11 +1173,11 @@
   (is (= 233168 (the-big-divide-solution 1000 3 5)))
   (is (= "2333333316666668" (str (the-big-divide-solution 100000000 3 5))))
   (is (= "110389610389889610389610"
-  (str (the-big-divide-solution (* 10000 10000 10000) 7 11))))
+         (str (the-big-divide-solution (* 10000 10000 10000) 7 11))))
   (is (= "1277732511922987429116"
-  (str (the-big-divide-solution (* 10000 10000 10000) 757 809))))
+         (str (the-big-divide-solution (* 10000 10000 10000) 757 809))))
   (is (= "4530161696788274281"
-  (str (the-big-divide-solution (* 10000 10000 1000) 1597 3571)))))
+         (str (the-big-divide-solution (* 10000 10000 1000) 1597 3571)))))
 
 ;(deftest palindromic-numbers-solution-test
 ;  (is (= (take 26 (palindromic-numbers-solution 0))
@@ -1280,44 +1280,44 @@
 
 (deftest pairwise-disjoint-sets-solution-test
   (is (= (pairwise-disjoint-sets-solution #{#{\U} #{\s} #{\e \R \E} #{\P \L} #{\.}})
-   true))
+         true))
   (is (= (pairwise-disjoint-sets-solution #{#{:a :b :c :d :e}
-         #{:a :b :c :d}
-         #{:a :b :c}
-         #{:a :b}
-         #{:a}})
-   false))
+                                            #{:a :b :c :d}
+                                            #{:a :b :c}
+                                            #{:a :b}
+                                            #{:a}})
+         false))
   (is (= (pairwise-disjoint-sets-solution #{#{[1 2 3] [4 5]}
-         #{[1 2] [3 4 5]}
-         #{[1] [2] 3 4 5}
-         #{1 2 [3 4] [5]}})
-   true))
+                                            #{[1 2] [3 4 5]}
+                                            #{[1] [2] 3 4 5}
+                                            #{1 2 [3 4] [5]}})
+         true))
   (is (= (pairwise-disjoint-sets-solution #{#{'a 'b}
-         #{'c 'd 'e}
-         #{'f 'g 'h 'i}
-         #{''a ''c ''f}})
-   true))
+                                            #{'c 'd 'e}
+                                            #{'f 'g 'h 'i}
+                                            #{''a ''c ''f}})
+         true))
   (is (= (pairwise-disjoint-sets-solution #{#{'(:x :y :z) '(:x :y) '(:z) '()}
-         #{#{:x :y :z} #{:x :y} #{:z} #{}}
-         #{'[:x :y :z] [:x :y] [:z] [] {}}})
-   false))
+                                            #{#{:x :y :z} #{:x :y} #{:z} #{}}
+                                            #{'[:x :y :z] [:x :y] [:z] [] {}}})
+         false))
   (is (= (pairwise-disjoint-sets-solution #{#{(= "true") false}
-         #{:yes :no}
-         #{(class 1) 0}
-         #{(symbol "true") 'false}
-         #{(keyword "yes") ::no}
-         #{(class '1) (int \0)}})
-   false))
+                                            #{:yes :no}
+                                            #{(class 1) 0}
+                                            #{(symbol "true") 'false}
+                                            #{(keyword "yes") ::no}
+                                            #{(class '1) (int \0)}})
+         false))
   (is (= (pairwise-disjoint-sets-solution #{#{distinct?}
-         #{#(-> %) #(-> %)}
-         #{#(-> %) #(-> %) #(-> %)}
-         #{#(-> %) #(-> %) #(-> %)}})
-   true))
-  (is (= (pairwise-disjoint-sets-solution #{#{(#(-> *)) + (quote mapcat) #_ nil}
-         #{'+ '* mapcat (comment mapcat)}
-         #{(do) set contains? nil?}
-         #{, , , #_, , empty?}})
-   false)))
+                                            #{#(-> %) #(-> %)}
+                                            #{#(-> %) #(-> %) #(-> %)}
+                                            #{#(-> %) #(-> %) #(-> %)}})
+         true))
+  (is (= (pairwise-disjoint-sets-solution #{#{(#(-> *)) + (quote mapcat) #_nil}
+                                            #{'+ '* mapcat (comment mapcat)}
+                                            #{(do) set contains? nil?}
+                                            #{,,, #_,, empty?}})
+         false)))
 
 ;(deftest infinite-matrix-solution-test
 ;  (is (= (take 5 (map #(take 6 %) (infinite-matrix-solution str)))
@@ -1364,21 +1364,21 @@
 
 (deftest decurry-solution-test
   (is (= 10 ((decurry-solution (fn [a]
-             (fn [b]
-               (fn [c]
-                 (fn [d]
-                   (+ a b c d))))))
-       1 2 3 4)))
+                                 (fn [b]
+                                   (fn [c]
+                                     (fn [d]
+                                       (+ a b c d))))))
+             1 2 3 4)))
   (is (= 24 ((decurry-solution (fn [a]
-             (fn [b]
-               (fn [c]
-                 (fn [d]
-                   (* a b c d))))))
-       1 2 3 4)))
+                                 (fn [b]
+                                   (fn [c]
+                                     (fn [d]
+                                       (* a b c d))))))
+             1 2 3 4)))
   (is (= 25 ((decurry-solution (fn [a]
-             (fn [b]
-               (* a b))))
-       5 5))))
+                                 (fn [b]
+                                   (* a b))))
+             5 5))))
 
 (deftest intervals-solution-test
   (is (= (intervals-solution [1 2 3]) [[1 3]]))
@@ -1386,7 +1386,7 @@
   (is (= (intervals-solution [1 1 1 1 1 1 1]) [[1 1]]))
   (is (= (intervals-solution []) []))
   (is (= (intervals-solution [19 4 17 1 3 10 2 13 13 2 16 4 2 15 13 9 6 14 2 11])
-       [[1 4] [6 6] [9 11] [13 17] [19 19]])))
+         [[1 4] [6 6] [9 11] [13 17] [19 19]])))
 
 (deftest balancing-brackets-solution-test
   (is (balancing-brackets-solution "This string has no brackets."))
@@ -1475,38 +1475,38 @@
   (is (= :straight-flush (best-hand-solution ["HA" "HK" "HQ" "HJ" "HT"]))))
 
 (deftest for-science-solution-test
-  (is (= true  (for-science-solution ["M   C"])))
+  (is (= true (for-science-solution ["M   C"])))
   (is (= false (for-science-solution ["M # C"])))
-  (is (= true  (for-science-solution ["#######"
-              "#     #"
-              "#  #  #"
-              "#M # C#"
-              "#######"])))
+  (is (= true (for-science-solution ["#######"
+                                     "#     #"
+                                     "#  #  #"
+                                     "#M # C#"
+                                     "#######"])))
   (is (= false (for-science-solution ["########"
-              "#M  #  #"
-              "#   #  #"
-              "# # #  #"
-              "#   #  #"
-              "#  #   #"
-              "#  # # #"
-              "#  #   #"
-              "#  #  C#"
-              "########"])))
+                                      "#M  #  #"
+                                      "#   #  #"
+                                      "# # #  #"
+                                      "#   #  #"
+                                      "#  #   #"
+                                      "#  # # #"
+                                      "#  #   #"
+                                      "#  #  C#"
+                                      "########"])))
   (is (= false (for-science-solution ["M     "
-              "      "
-              "      "
-              "      "
-              "    ##"
-              "    #C"])))
-  (is (= true  (for-science-solution ["C######"
-              " #     "
-              " #   # "
-              " #   #M"
-              "     # "])))
-  (is (= true  (for-science-solution ["C# # # #"
-              "        "
-              "# # # # "
-              "        "
-              " # # # #"
-              "        "
-              "# # # #M"]))))
+                                      "      "
+                                      "      "
+                                      "      "
+                                      "    ##"
+                                      "    #C"])))
+  (is (= true (for-science-solution ["C######"
+                                     " #     "
+                                     " #   # "
+                                     " #   #M"
+                                     "     # "])))
+  (is (= true (for-science-solution ["C# # # #"
+                                     "        "
+                                     "# # # # "
+                                     "        "
+                                     " # # # #"
+                                     "        "
+                                     "# # # #M"]))))

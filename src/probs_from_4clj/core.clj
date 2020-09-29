@@ -1,6 +1,6 @@
 (ns probs-from-4clj.core
-  (:require clojure.set
-            clojure.string))
+  (:require [clojure.set
+             clojure.string]))
 
 ;; Note: some solutions that would be written
 ;;  foo bar
@@ -120,14 +120,14 @@
   (partial filter odd?))
 
 ;; problem 26
-(def fibonacci-sequence-solution 
+(def fibonacci-sequence-solution
   (partial
     (fn f
-    [a b n]
+      [a b n]
       (if (= 1 n)
-       [a]
-       (cons a
-             (f b (+ a b) (- n 1))))) 1 1))
+        [a]
+        (cons a
+              (f b (+ a b) (- n 1))))) 1 1))
 
 ;; problem 27
 (defn palindrome-detector-solution [c]
@@ -153,9 +153,9 @@
 (def compress-a-sequence-solution
   (partial
     reduce (fn [c e]
-           (if (= (last c) e)
-             c
-             (conj c e))) []))
+             (if (= (last c) e)
+               c
+               (conj c e))) []))
 
 ;; problem 31
 (def pack-a-sequence-solution
@@ -208,7 +208,7 @@
 
 ;; problem 43
 (defn reverse-interleave-solution [coll n]
-  (map 
+  (map
     (fn [i]
       (keep-indexed (fn [idx item] (if (= (mod idx n) 0) item)) (drop (dec i) coll)))
     (range 1 (inc n))))
@@ -216,9 +216,9 @@
 ;; problem 44
 (defn rotate-sequence-solution [n c]
   (cond
-   (= 0 n) c
-   (< 0 n) (recur (dec n) (conj (vec (rest c)) (first c)))
-   1       (recur (inc n) (vec (cons (last c) (drop-last c))))))
+    (= 0 n) c
+    (< 0 n) (recur (dec n) (conj (vec (rest c)) (first c)))
+    1 (recur (inc n) (vec (cons (last c) (drop-last c))))))
 
 ;; problem 45
 (def intro-to-iterate-solution
@@ -257,42 +257,42 @@
          c count]
      (distinct
        (apply concat
-         (reduce
-           (fn [a b]
-             (if (and
-                   (< (c a) (c b))
-                   (every? t b))
-                 b a))
-           []
-           (partition-by t (partition 2 1 %)))))))
+              (reduce
+                (fn [a b]
+                  (if (and
+                        (< (c a) (c b))
+                        (every? t b))
+                    b a))
+                []
+                (partition-by t (partition 2 1 %)))))))
 
 ;; problem 54
 (def partition-a-sequence-solution
   #((fn [n c t]
-       (if (< (count c) n)
-         t
-         (recur n (drop n c) (conj t (take n c)))))
+      (if (< (count c) n)
+        t
+        (recur n (drop n c) (conj t (take n c)))))
     % %2 []))
 
 ;; problem 55
 (def count-occurrences-solution
   (partial
     reduce #(assoc % %2
-            (if (% %2)
-              (inc (% %2))
-              1)) {}))
+                     (if (% %2)
+                       (inc (% %2))
+                       1)) {}))
 
 ;; problem 56
 (def find-distinct-items-solution
   #(loop [s #{}
           a []
           c %]
-    (if (empty? c)
-      a
-      (let [[h & t] c]
-        (if (s h)
-          (recur s a t)
-          (recur (conj s h) (conj a h) t))))))
+     (if (empty? c)
+       a
+       (let [[h & t] c]
+         (if (s h)
+           (recur s a t)
+           (recur (conj s h) (conj a h) t))))))
 
 ;; problem 57
 (def simple-recursion-solution
@@ -300,7 +300,7 @@
 
 ;; problem 58
 (defn function-composition-solution [& f]
-  #(loop [r  (apply (last f) %&)
+  #(loop [r (apply (last f) %&)
           f (rest (reverse f))]
      (if (empty? f)
        r
@@ -309,16 +309,16 @@
 
 ;; problem 59
 (defn juxtaposition-solution [& f]
-    (fn [& e]
-      (map #(apply % e) f)))
+  (fn [& e]
+    (map #(apply % e) f)))
 
 ;; problem 60
 (defn sequence-reductions-solution [f & [a e]]
   ((fn w [a c]
-    (lazy-seq
-      (if (empty? c)
-        [a]
-        (cons a (w (f a (first c)) (rest c))))))
+     (lazy-seq
+       (if (empty? c)
+         [a]
+         (cons a (w (f a (first c)) (rest c))))))
    (if e a (first a))
    (or e (rest a))))
 
@@ -347,11 +347,11 @@
 ;; problem 65
 (def black-box-testing-solution
   #(case (-> % str first)
-   \[ :vector
-   \( :list
-   \{ :map
-   \# :set
-   \c :list))
+     \[ :vector
+     \( :list
+     \{ :map
+     \# :set
+     \c :list))
 
 ;; problem 66
 (def greatest-common-divisor-solution
@@ -374,9 +374,9 @@
   (reduce #(reduce
              (fn [m [k v]]
                (assoc m k
-                    (if (m k) 
-                        (o (m k) v)
-                        v))) % %2)
+                        (if (m k)
+                          (o (m k) v)
+                          v))) % %2)
           m s))
 
 ;; problem 70
@@ -408,9 +408,9 @@
 ;; problem 74
 (defn filter-perfect-squares-solution [c]
   (clojure.string/join ","
-    (filter #(let [s (-> % read-string Math/sqrt)]
-                (== s (int s)))
-            (clojure.string/split c #","))))
+                       (filter #(let [s (-> % read-string Math/sqrt)]
+                                  (== s (int s)))
+                               (clojure.string/split c #","))))
 
 ;; problem 75
 (defn euler-s-totient-function-solution [n]
@@ -429,7 +429,7 @@
 ;; problem 77
 (defn anagram-finder-solution [c]
   (set (map set (filter #(not= 1 (count %))
-                  (partition-by sort (sort-by #(apply str (sort %)) c))))))
+                        (partition-by sort (sort-by #(apply str (sort %)) c))))))
 
 ;; problem 78
 (defn reimplement-trampoline-solution [f & a]
@@ -442,11 +442,11 @@
 ;; problem 79
 (def triangle-minimal-path-solution
   #((fn t [[a & r :as x] i s]
-     (if (empty? x)
-       s
-       (min
-         (t r i (+ (a i) s))
-         (t r (+ 1 i) (+ (a i) s)))))
+      (if (empty? x)
+        s
+        (min
+          (t r i (+ (a i) s))
+          (t r (+ 1 i) (+ (a i) s)))))
     % 0 0))
 
 ;; problem 80
@@ -455,7 +455,7 @@
       (cond
         (= d n) (= n a)
         (< n a) false
-        1     (recur n (inc d) (if (= 0 (mod n d)) (+ a d) a))))
+        1 (recur n (inc d) (if (= 0 (mod n d)) (+ a d) a))))
     % 1 0))
 
 ;; problem 81
@@ -491,22 +491,22 @@
            c (count r)]
       (let [k reduce
             r
-            (k
-              (fn [r [a b]]
-                (k (fn [r [f l]]
-                      (let [r (if (= b f) (conj r [a l]) r)]
-                        (if (= l a) (conj r [f b]) r)))
-                    r
-                    r))
-              r
-              r)
-              d (count r)]
+              (k
+                (fn [r [a b]]
+                  (k (fn [r [f l]]
+                       (let [r (if (= b f) (conj r [a l]) r)]
+                         (if (= l a) (conj r [f b]) r)))
+                     r
+                     r))
+                r
+                r)
+            d (count r)]
         (if (= c d)
           r
           (recur r d))))))
 
 ;; problem 85
-(def power-set-solution ;; FIXME the tests timeout on 4clojure.com
+(def power-set-solution                                               ;; FIXME the tests timeout on 4clojure.com
   ;; Write a function which generates the <a
   ;; href="http://en.wikipedia.org/wiki/Power_set">power set</a> of a given
   ;; set.  The power set of a set x is the set of all subsets of x, including
@@ -518,14 +518,14 @@
   (loop [s #{}
          n n]
     (cond
-     (= n 1) true
-     (s n) false
-     1     (recur (conj s n)
-                  (int (reduce + (map #(-> %
-                                          str
-                                          (Integer/parseInt)
-                                          ((fn [x] (* x x))))
-                                      (str n))))))))
+      (= n 1) true
+      (s n) false
+      1 (recur (conj s n)
+               (int (reduce + (map #(-> %
+                                        str
+                                        (Integer/parseInt)
+                                        ((fn [x] (* x x))))
+                                   (str n))))))))
 
 ;; problem 88
 (def symmetric-difference-solution
@@ -533,7 +533,7 @@
     #(clojure.set/union (d % %2) (d %2 %))))
 
 ;; problem 89
-(defn graph-tour-solution [edges] ;; TODO
+(defn graph-tour-solution [edges]                                     ;; TODO
   ;; Starting with a graph you must write a function that returns true if it is
   ;; possible to make a tour of the graph in which every edge is visited
   ;; exactly once.<br/><br/>The graph is represented by a vector of tuples,
@@ -552,15 +552,15 @@
     (let [k reduce
           p (k (fn [m [a b]]
                  (assoc m
-                        a (conj (get m a) b)
-                        b (conj (get m b) a))) {} g)]
+                   a (conj (get m a) b)
+                   b (conj (get m b) a))) {} g)]
       (loop [n (into #{} (first g))
              c 0]
         (let [n (k
                   (fn [N n]
                     (into N (p n)))
-                      n
-                      n)
+                  n
+                  n)
               d (count n)]
           (if (= d c)
             (= d (count p))
@@ -570,21 +570,21 @@
 (defn read-roman-numerals-solution [r]
   (let [p clojure.string/replace]
     (reduce +
-      (map
-        {\I    1
-         \V    5
-         \X   10
-         \L   50
-         \C  100
-         \D  500
-         \M 1000}
-        (-> r
-          (p #"IV"  "IIII")
-          (p #"IX" "VIIII")
-          (p #"XL"  "XXXX")
-          (p #"XC" "LXXXX")
-          (p #"CD"  "CCCC")
-          (p #"CM" "DCCCC"))))))
+            (map
+              {\I 1
+               \V 5
+               \X 10
+               \L 50
+               \C 100
+               \D 500
+               \M 1000}
+              (-> r
+                  (p #"IV" "IIII")
+                  (p #"IX" "VIIII")
+                  (p #"XL" "XXXX")
+                  (p #"XC" "LXXXX")
+                  (p #"CD" "CCCC")
+                  (p #"CM" "DCCCC"))))))
 
 ;; problem 93
 (defn partially-flatten-a-sequence-solution [xs]
@@ -593,7 +593,7 @@
   ;; items.  The result should be a sequence of sequences with only one level
   ;; of nesting.
   (;; copy only these two forms in 4Clojure
-   clojure.walk/postwalk
+    clojure.walk/postwalk
     #(if (coll? %)
        (if (coll? (first %))
          (mapcat comp %)
@@ -689,18 +689,18 @@
 ;; problem 96
 (def beauty-is-symmetry-solution
   #(=
-    ((fn v [[t l r]]
-      (if t
-        [t (v r) (v l)]))
-     %)
-    %))
+     ((fn v [[t l r]]
+        (if t
+          [t (v r) (v l)]))
+      %)
+     %))
 
 ;; problem 97
 (defn pascal-s-triangle-solution [n]
   (if (= n 1) [1]
-    (conj (vec (cons 1 (map #(apply + %)
-                            (partition 2 1
-                              (pascal-s-triangle-solution (dec n)))))) 1)))
+              (conj (vec (cons 1 (map #(apply + %)
+                                      (partition 2 1
+                                                 (pascal-s-triangle-solution (dec n)))))) 1)))
 
 ;; problem 98
 (def equivalence-classes-solution
@@ -714,12 +714,12 @@
 (defn least-common-multiple-solution [& c]
   (reduce
     #(/ (* % %2)
-      (loop [a %
-             b %2]
-        (cond
-          (= a b) a
-          (> a b) (recur (- a b) b)
-          1     (recur a (- b a)))))
+        (loop [a %
+               b %2]
+          (cond
+            (= a b) a
+            (> a b) (recur (- a b) b)
+            1 (recur a (- b a)))))
     c))
 
 ;; problem 101
@@ -732,20 +732,20 @@
             e empty?
             n count]
         (cond
-          (= a b)  c
-          (e a)    (+ c (n b))
-          (e b)    (+ c (n a))
+          (= a b) c
+          (e a) (+ c (n b))
+          (e b) (+ c (n a))
           (= (f a) (f b)) (L p q c)
-          1     (min
-                  (L p b i)
-                  (L a q i)
-                  (L p q i)))))
+          1 (min
+              (L p b i)
+              (L a q i)
+              (L p q i)))))
     % %2 0))
 
 ;; problem 102
 (def intocamelcase-solution
   #(clojure.string/replace % #"-(.)"
-      (fn [[_ a]] (clojure.string/upper-case a))))
+                           (fn [[_ a]] (clojure.string/upper-case a))))
 
 ;; problem 103
 (def generating-k-combinations-solution
@@ -769,15 +769,15 @@
 ;; problem 104
 (defn write-roman-numerals-solution [n]
   (let [r clojure.string/replace]
-    (-> (loop [s   ""
-               n   n
+    (-> (loop [s ""
+               n n
                x [[1000 \M]
-                  [ 500 \D]
-                  [ 100 \C]
-                  [  50 \L]
-                  [  10 \X]
-                  [   5 \V]
-                  [   1 \I]]]
+                  [500 \D]
+                  [100 \C]
+                  [50 \L]
+                  [10 \X]
+                  [5 \V]
+                  [1 \I]]]
           (if (empty? x)
             s
             (let [[d c] (first x)]
@@ -785,19 +785,19 @@
                 (str s (apply str (repeat (quot n d) c)))
                 (mod n d)
                 (rest x)))))
-      (r "DCCCC" "CM")
-      (r  "CCCC" "CD")
-      (r "LXXXX" "XC")
-      (r  "XXXX" "XL")
-      (r "VIIII" "IX")
-      (r  "IIII" "IV"))))
+        (r "DCCCC" "CM")
+        (r "CCCC" "CD")
+        (r "LXXXX" "XC")
+        (r "XXXX" "XL")
+        (r "VIIII" "IX")
+        (r "IIII" "IV"))))
 
 ;; problem 105
 (defn identify-keys-and-values-solution [c]
   (into {}
-    (map #(let [[[x] y] %] [x y])
-         (partition 2 (map #(filter identity %)
-                           (partition-by keyword? (interpose nil c)))))))
+        (map #(let [[[x] y] %] [x y])
+             (partition 2 (map #(filter identity %)
+                               (partition-by keyword? (interpose nil c)))))))
 
 ;; problem 106
 (def number-maze-solution
@@ -808,23 +808,23 @@
          m (x (* 2 (Math/abs (- b a))))
          i (x m)]
 
-      ((fn M [a c v]
-         (let [d (x c)
-               w (conj v a)
-               A (* a 2)]
-           (cond
-             (v a) i
-             (> c m) i
-             (= a b) d
+     ((fn M [a c v]
+        (let [d (x c)
+              w (conj v a)
+              A (* a 2)]
+          (cond
+            (v a) i
+            (> c m) i
+            (= a b) d
 
-             (and (odd? a) (e b)) (recur A d w)
+            (and (odd? a) (e b)) (recur A d w)
 
-             1     (min
-                      (M (+ a 2) d w)
-                      (M A       d w)
-                      (if (e a) (M (/ a 2) d w) i)))))
+            1 (min
+                (M (+ a 2) d w)
+                (M A d w)
+                (if (e a) (M (/ a 2) d w) i)))))
 
-       a 0 #{})))
+      a 0 #{})))
 
 ;; problem 107
 (defn simple-closures-solution [n]
@@ -860,7 +860,7 @@
         (s f (apply #(map str % %2 %3) g))))))
 
 ;; problem 112
-(defn sequs-horribilis-solution [n xs] ;; TODO
+(defn sequs-horribilis-solution [n xs]                                ;; TODO
   ;; Create a function which takes an integer and a nested collection of
   ;; integers as arguments.  Analyze the elements of the input collection and
   ;; return a sequence which maintains the nested structure, and which includes
@@ -871,24 +871,24 @@
 ;; problem 113
 (def making-data-dance-solution
   #(reify java.lang.Iterable
-      (toString [t] (clojure.string/join ", " (sort %&)))
-      (iterator [t] (.listIterator (distinct %&)))))
+     (toString [t] (clojure.string/join ", " (sort %&)))
+     (iterator [t] (.listIterator (distinct %&)))))
 
 ;; problem 114
 (defn global-take-while-solution [n p s]
   (lazy-seq
-   (if-not (empty? s)
-     (let [[x & s] s]
-       (if (< n 2)
-         (if (p x) [] (cons x (global-take-while-solution 0 p s)))
-         (cons x (global-take-while-solution (if (p x) (dec n) n) p s)))))))
+    (if-not (empty? s)
+      (let [[x & s] s]
+        (if (< n 2)
+          (if (p x) [] (cons x (global-take-while-solution 0 p s)))
+          (cons x (global-take-while-solution (if (p x) (dec n) n) p s)))))))
 
 ;; problem 115
 (defn the-balance-of-n-solution [x]
   (let [to-i #(- (int %) (int \0))
-        s (str x)
-        c (count s)
-        m (int (/ c 2))]
+        s    (str x)
+        c    (count s)
+        m    (int (/ c 2))]
     (=
       (apply + (map to-i (take m s)))
       (apply + (map to-i (drop (- c m) s))))))
@@ -896,18 +896,18 @@
 ;; problem 116
 (def prime-sandwich-solution
   ((fn []
-    (let [e first
-          r range
-          f #(e (filter % %2))
-          a (for [x (drop 2 (r)) :when (every? #(not= (mod x %) 0) (r 2 x))] x)
-          p (fn [n] (= (e (drop-while #(< % n) a)) n))]
-      #(let [q (f p (r (- % 2) 1 -2))]
-         (boolean
-           (and
-            (p %)
-            q
-            (if-let [s (f p (r (+ % 2) (+ 1 % (- % q)) 2))]
-              (= (- % q) (- s %))))))))))
+     (let [e first
+           r range
+           f #(e (filter % %2))
+           a (for [x (drop 2 (r)) :when (every? #(not= (mod x %) 0) (r 2 x))] x)
+           p (fn [n] (= (e (drop-while #(< % n) a)) n))]
+       #(let [q (f p (r (- % 2) 1 -2))]
+          (boolean
+            (and
+              (p %)
+              q
+              (if-let [s (f p (r (+ % 2) (+ 1 % (- % q)) 2))]
+                (= (- % q) (- s %))))))))))
 
 ;; problem 117
 (defn for-science-solution [m]
@@ -921,17 +921,17 @@
         y (ffirst (filter (fn [[i e]] (<= 0 (M e))) (map #(into [] %&) (r) m)))
         i #(= (get-in m % \#) \#)]
     ((fn o [p b]
-      (loop [s (let [[y x] p] [[(dec y) x] [(n y) x] [y (dec x)] [y (n x)]])
-             b b]
-        (if (empty? s)
-          false
-          (let [[p & s] s]
-            (if (or (i p) (b p))
-              (recur s (c b p))
-              (or (= (get-in m p) \C)
-                (o p (c b p))
-                (recur s (c b p))
-              ))))))
+       (loop [s (let [[y x] p] [[(dec y) x] [(n y) x] [y (dec x)] [y (n x)]])
+              b b]
+         (if (empty? s)
+           false
+           (let [[p & s] s]
+             (if (or (i p) (b p))
+               (recur s (c b p))
+               (or (= (get-in m p) \C)
+                   (o p (c b p))
+                   (recur s (c b p))
+                   ))))))
      [y (M (nth m y))]
      (into #{}
            (for [p [(r -1 (n h))
@@ -941,12 +941,12 @@
 (defn re-implement-map-solution [f s]
   (if (seq s)
     (cons
-     (f (first s))
-     (lazy-seq (re-implement-map-solution f (rest s))))
+      (f (first s))
+      (lazy-seq (re-implement-map-solution f (rest s))))
     []))
 
 ;; problem 119
-(defn win-at-tic-tac-toe-solution [piece board] ;; TODO
+(defn win-at-tic-tac-toe-solution [piece board]                       ;; TODO
   ;; <p>As in <a href="/problem/73">Problem 73</a>, a tic-tac-toe board is
   ;; represented by a two dimensional vector. X is represented by :x, O is
   ;; represented by :o, and empty is represented by :e. Create a function that
@@ -974,9 +974,9 @@
     (fn [m]
       ((fn v [f m]
          (cond
-           (seq? f)    (apply (-> f first o) (map #(v % m) (rest f)))
+           (seq? f) (apply (-> f first o) (map #(v % m) (rest f)))
            (number? f) f
-           1           (m f)))
+           1 (m f)))
        f m))))
 
 ;; problem 122
@@ -984,7 +984,7 @@
   #(Integer/parseInt % 2))
 
 ;; problem 124
-(defn analyze-reversi-solution [& args] ;; TODO
+(defn analyze-reversi-solution [& args]                               ;; TODO
   ;; <p><a href="http://en.wikipedia.org/wiki/Reversi">Reversi</a> is normally
   ;; played on an 8 by 8 board. In this problem, a 4 by 4 board is represented
   ;; as a two-dimensional vector with black, white, and empty pieces
@@ -1009,7 +1009,7 @@
   Class)
 
 ;; problem 127
-(defn love-triangle-solution [& args] ;; TODO
+(defn love-triangle-solution [& args]                                 ;; TODO
   ;; Everyone loves triangles, and it's easy to understand why&mdash;they're so
   ;; wonderfully symmetric (except scalenes, they suck).  <br/><br/> Your
   ;; passion for triangles has led you to become a miner (and part-time Clojure
@@ -1050,7 +1050,7 @@
      :rank (.indexOf "23456789TJQKA" (str l))}))
 
 ;; problem 130
-(defn tree-reparenting-solution [& args] ;; TODO
+(defn tree-reparenting-solution [& args]                              ;; TODO
   ;; Every node of a tree is connected to each of its children as well as its
   ;; parent.  One can imagine grabbing one node of a tree and dragging it up to
   ;; the root position, leaving all connections intact.  For example, below on
@@ -1072,7 +1072,7 @@
   nil)
 
 ;; problem 131
-(defn sum-some-set-subsets-solution [& ss] ;; TODO
+(defn sum-some-set-subsets-solution [& ss]                            ;; TODO
   ;; Given a variable number of sets of integers, create a function which
   ;; returns true iff all of the sets have a non-empty subset with an
   ;; equivalent summation.
@@ -1094,21 +1094,21 @@
 ;; problem 137
 (def digits-and-bases-solution
   #(if (= % 0)
-      [0]
-      (let [m (Math/pow %2 (int (/ (Math/log %) (Math/log %2))))]
-        (loop [n %
-               m m
-               s []]
-          (if (< m 1)
-            s
-            (recur
-              (mod n m)
-              (/ m %2)
-              (conj s (int (/ n m)))))))))
+     [0]
+     (let [m (Math/pow %2 (int (/ (Math/log %) (Math/log %2))))]
+       (loop [n %
+              m m
+              s []]
+         (if (< m 1)
+           s
+           (recur
+             (mod n m)
+             (/ m %2)
+             (conj s (int (/ n m)))))))))
 
 
 ;; problem 138
-(defn squares-squared-solution [& args] ;; TODO
+(defn squares-squared-solution [& args]                               ;; TODO
   ;; Create a function of two integer arguments: the start and end,
   ;; respectively.  You must create a vector of strings which renders a 45&deg;
   ;; rotated square of integers which are successive squares from the start
@@ -1121,7 +1121,7 @@
   nil)
 
 ;; problem 140
-(defn veitch-please-solution [& args] ;; TODO
+(defn veitch-please-solution [& args]                                 ;; TODO
   ;; Create a function which accepts as input a boolean algebra function in the
   ;; form of a set of sets, where the inner sets are collections of symbols
   ;; corresponding to the input boolean variables which satisfy the function
@@ -1146,24 +1146,24 @@
                     R :rank
                     x (S %)
                     y (S %2)
-                    m  (max (R %) (R %2))]
+                    m (max (R %) (R %2))]
                 (cond
-                  (= t x y) ; trump, already one card
-                    {S t
-                     R m}
-                  (= t y) ; trump, first card
-                    %2
-                  (= x y) ; lead
-                    {S x
-                     R m}
-                  1     %)))))
+                  (= t x y)                                           ; trump, already one card
+                  {S t
+                   R m}
+                  (= t y)                                             ; trump, first card
+                  %2
+                  (= x y)                                             ; lead
+                  {S x
+                   R m}
+                  1 %)))))
 
 ;; problem 143
 (defn dot-product-solution [s t]
   (if (seq s)
     (+
-     (* (first s) (first t))
-     (dot-product-solution (rest s) (rest t)))
+      (* (first s) (first t))
+      (dot-product-solution (rest s) (rest t)))
     0))
 
 ;; problem 144
@@ -1183,8 +1183,8 @@
 ;; problem 146
 (def trees-into-tables-solution
   #(into {}
-     (for [[k v] %]
-       (reduce (fn [m [l v]] (assoc m [k l] v)) {} v))))
+         (for [[k v] %]
+           (reduce (fn [m [l v]] (assoc m [k l] v)) {} v))))
 
 ;; problem 147
 (defn pascal-s-trapezoid-solution [x]
@@ -1193,7 +1193,7 @@
           (conj
             (vec
               (cons (first x)
-                (map #(apply +' %) (partition 2 1 x)))) (last x))]
+                    (map #(apply +' %) (partition 2 1 x)))) (last x))]
       (cons x (pascal-s-trapezoid-solution y)))))
 
 ;; problem 148
@@ -1206,7 +1206,7 @@
         (f (* a b))))))
 
 ;; problem 150
-(defn palindromic-numbers-solution [n] ;; TODO
+(defn palindromic-numbers-solution [n]                                ;; TODO
   ;; <p>A palindromic number is a number that is the same when written forwards
   ;; or backwards (e.g., 3, 99, 14341).</p>
   ;; 
@@ -1218,7 +1218,7 @@
   nil)
 
 ;; problem 152
-(defn latin-square-slicing-solution [& args] ;; TODO
+(defn latin-square-slicing-solution [& args]                          ;; TODO
   nil)
 
 ;; problem 153
@@ -1236,11 +1236,11 @@
 ;; problem 158
 (def decurry-solution
   #(fn [& a]
-   (loop [f %
-          a a]
-     (if (empty? a)
-       f
-       (recur (f (first a)) (rest a))))))
+     (loop [f %
+            a a]
+       (if (empty? a)
+         f
+         (recur (f (first a)) (rest a))))))
 
 ;; problem 161
 (def subset-and-superset-solution
@@ -1282,7 +1282,7 @@
       :eq)))
 
 ;; problem 168
-(defn infinite-matrix-solution [& args] ;; TODO
+(defn infinite-matrix-solution [& args]                               ;; TODO
   ;; 
   ;; In what follows, m, n, s, t 
   ;; denote nonnegative integers, f denotes a function that accepts two 
@@ -1329,10 +1329,10 @@
                #(let [f (first %)
                       l (if (= 1 (c %)) f (last %))]
                   (if (< (- l f) 2) [f l] [f s l]))
-              (if
-                (= 1 (c t))
-                [t]
-                (partition 2 1 t))))]
+               (if
+                 (= 1 (c t))
+                 [t]
+                 (partition 2 1 t))))]
     (map (fn [c] [(a min c) (a max c)])
          (remove (partial = [s]) (partition-by #(= s %) q)))))
 
@@ -1346,33 +1346,33 @@
          m {\[ \]
             \( \)
             \{ \}}]
-    (loop [f (w %)
-           r (x %)
-           p []]
+     (loop [f (w %)
+            r (x %)
+            p []]
 
-      (cond
-        (not f) (empty? p)
-        (#{\( \{ \[} f) (recur (w r) (x r) (cons f p))
-        (#{\) \} \]} f) (if (and
-                              (seq p)
-                              (= (m (w p)) f))
-                          (recur (w r) (x r) (x p)))
-        1     (recur (w r) (x r) p)))))
+       (cond
+         (not f) (empty? p)
+         (#{\( \{ \[} f) (recur (w r) (x r) (cons f p))
+         (#{\) \} \]} f) (if (and
+                               (seq p)
+                               (= (m (w p)) f))
+                           (recur (w r) (x r) (x p)))
+         1 (recur (w r) (x r) p)))))
 
 ;; problem 178
 (def best-hand-solution
   (fn [c]
-    (let [all-eq? (fn [[h & t]]
-                    (every? #(= % h) t))
-          c (sort-by
-              last
-              (map (fn [[f l]] [f (.indexOf "_A23456789TJQK" (str l))]) c))
-          n (map last c)  ; numbers (ranks)
-          s (map first c) ; suits
+    (let [all-eq?    (fn [[h & t]]
+                       (every? #(= % h) t))
+          c          (sort-by
+                       last
+                       (map (fn [[f l]] [f (.indexOf "_A23456789TJQK" (str l))]) c))
+          n          (map last c)                                     ; numbers (ranks)
+          s          (map first c)                                    ; suits
           [p1 p2 p3 p4 p5] n
-          sequ? (or
-                  (= n (range p1 (+ p1 5)))
-                  (= [1 10 11 12 13] n))
+          sequ?      (or
+                       (= n (range p1 (+ p1 5)))
+                       (= [1 10 11 12 13] n))
           same-suit? (all-eq? s)]
       (cond
         (and sequ? same-suit?) :straight-flush
@@ -1389,11 +1389,11 @@
           (all-eq? (take 3 (drop 1 n)))
           (all-eq? (drop 2 n))) :three-of-a-kind
         (= p1 p2)
-          (if (or (= p3 p4) (= p4 p5)) :two-pair :pair)
+        (if (or (= p3 p4) (= p4 p5)) :two-pair :pair)
 
         (= p2 p3)
-          (if (= p4 p5) :two-pair :pair)
+        (if (= p4 p5) :two-pair :pair)
         (or
           (= p3 p4)
           (= p4 p5)) :pair
-        1     :high-card))))
+        1 :high-card))))
