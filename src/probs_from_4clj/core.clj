@@ -1072,11 +1072,13 @@
   nil)
 
 ;; problem 131
-(defn sum-some-set-subsets-solution [& ss]                            ;; TODO
-  ;; Given a variable number of sets of integers, create a function which
-  ;; returns true iff all of the sets have a non-empty subset with an
-  ;; equivalent summation.
-  nil)
+(defn sum-some-set-subsets-solution [& ss]                            ;; FIXME times out on last test
+  ;; bruteforce
+  (let [power-set (fn p [s] (remove empty? (set (apply concat #{s} (map #(p (disj s %)) s)))))
+        set-sums  (->> ss
+                       (map power-set)
+                       (map (fn [s] (into #{} (map #(reduce + %) s)))))]
+    (not (empty? (apply clojure.set/intersection set-sums)))))
 
 ;; problem 132
 (def insert-between-two-items-solution
